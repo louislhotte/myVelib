@@ -1,5 +1,8 @@
 package fr.cs.GroupNN.myVelib;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 public class User {
     private String name;
     private int UserId;
@@ -8,8 +11,20 @@ public class User {
     private int UserTimeCreditBalance;
     private double totalCharges;
     private Cards registrationCard;
+    private String creditCardNumber;
+    private int numberOfRides;
+    private int totalRentTime;
+    private int timeCreditEarned;
+    private Bicycle rentedBicycle;
+    private LocalDateTime rentDateTime;
+    private ArrayList<Integer> listOfUsedBicycleIds;
 
-    public User(String name, int userId, int userLatitude, int userLongitude, int userTimeCreditBalance, double totalCharges, Cards registrationCard) {
+
+    public User(String name, int userId, int userLatitude, int userLongitude, int userTimeCreditBalance, double totalCharges, Cards registrationCard, String creditCardNumber, int numberOfRides, int totalRentTime, int timeCreditEarned, Bicycle rentedBicycle, LocalDateTime rentDateTime, ArrayList<Integer> listOfUsedBicycleIds) {
+        /*
+        @param
+
+         */
         this.name = name;
         UserId = userId;
         UserLatitude = userLatitude;
@@ -17,61 +32,12 @@ public class User {
         UserTimeCreditBalance = userTimeCreditBalance;
         this.totalCharges = totalCharges;
         this.registrationCard = registrationCard;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(int userId) {
-        UserId = userId;
-    }
-
-    public int getUserLatitude() {
-        return UserLatitude;
-    }
-
-    public void setUserLatitude(int userLatitude) {
-        UserLatitude = userLatitude;
-    }
-
-    public int getUserLongitude() {
-        return UserLongitude;
-    }
-
-    public void setUserLongitude(int userLongitude) {
-        UserLongitude = userLongitude;
-    }
-
-    public int getUserTimeCreditBalance() {
-        return UserTimeCreditBalance;
-    }
-
-    public void setUserTimeCreditBalance(int userTimeCreditBalance) {
-        UserTimeCreditBalance = userTimeCreditBalance;
-    }
-
-    public double getTotalCharges() {
-        return totalCharges;
-    }
-
-    public void setTotalCharges(double totalCharges) {
-        this.totalCharges = totalCharges;
-    }
-
-    public Cards getRegistrationCard() {
-        return registrationCard;
-    }
-
-    public void setRegistrationCard(Cards registrationCard) {
-        this.registrationCard = registrationCard;
+        this.creditCardNumber = creditCardNumber;
+        this.numberOfRides = numberOfRides;
+        this.totalRentTime = totalRentTime;
+        this.timeCreditEarned = timeCreditEarned;
+        this.rentedBicycle = rentedBicycle;
+        this.rentDateTime = rentDateTime;
+        this.listOfUsedBicycleIds = listOfUsedBicycleIds;
     }
 }
