@@ -21,9 +21,9 @@ public class User {
 
 
     public User(String name, int userId, int userLatitude, int userLongitude, int userTimeCreditBalance, double totalCharges, Cards registrationCard, String creditCardNumber, int numberOfRides, int totalRentTime, int timeCreditEarned, Bicycle rentedBicycle, LocalDateTime rentDateTime, ArrayList<Integer> listOfUsedBicycleIds) {
-        /*
-        @param
-
+        /**
+         * @param
+         * Detailler toutes les variables
          */
         this.name = name;
         UserId = userId;
