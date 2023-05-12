@@ -1,34 +1,42 @@
 @startuml
 class DockingStation {
     - id: int
-    - location: GPS
-    - type: StationType
+    - dockingStationLocation: (double, double)
+    - stationType: String
     - slots: ParkingSlot[]
     - terminal: Terminal
+    - on_service: boolean
+    + earnCredit()
 }
 
 class ParkingSlot {
+    - dockingStationId: int
     - id: int
     - status: SlotStatus
     - bike: Bicycle
+    + setBicycle()
+    + removeBicycle()
+}
+
+class Bicycle {
+    - bicycleId: int
+    - bicycleLocation: (double, double)
+    - status: String
+    + Bicycle()
 }
 
 class MechanicalBicycle {
-    - id: int
-    - location: GPS
-    - type: BikeType
+
 }
 
 class ElectricalBicycle {
-    - id: int
-    - location: GPS
-    - type: BikeType
+
 }
 
 class User {
     - id: int
     - name: String
-    - location: GPS
+    - userLocation: (double, double)
     - creditCard: CreditCard
     - registrationCard: RegistrationCard
     - timeCreditBalance: int
@@ -41,13 +49,19 @@ class CreditCard {
 }
 
 class RegistrationCard {
-    - type: CardType
+    - CardType: String
     - timeCreditEarned: int
+    + getCardType()
+}
+
+class terminal {
+    + calculateCost()
 }
 
 DockingStation --> ParkingSlot
-ParkingSlot --> MechanicalBicycle
-ParkingSlot --> ElectricalBicycle
+ParkingSlot --> Bicycle
+Bicycle --> MechanicalBicycle
+Bicycle --> ElectricalBicycle
 User --> CreditCard
 User --> RegistrationCard
 @enduml
