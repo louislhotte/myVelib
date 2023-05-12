@@ -1,0 +1,53 @@
+@startuml
+class DockingStation {
+    - id: int
+    - location: GPS
+    - type: StationType
+    - slots: ParkingSlot[]
+    - terminal: Terminal
+}
+
+class ParkingSlot {
+    - id: int
+    - status: SlotStatus
+    - bike: Bicycle
+}
+
+class MechanicalBicycle {
+    - id: int
+    - location: GPS
+    - type: BikeType
+}
+
+class ElectricalBicycle {
+    - id: int
+    - location: GPS
+    - type: BikeType
+}
+
+class User {
+    - id: int
+    - name: String
+    - location: GPS
+    - creditCard: CreditCard
+    - registrationCard: RegistrationCard
+    - timeCreditBalance: int
+    - totalChargeBalance: double
+}
+
+class CreditCard {
+    - number: String
+    - expirationDate: Date
+}
+
+class RegistrationCard {
+    - type: CardType
+    - timeCreditEarned: int
+}
+
+DockingStation --> ParkingSlot
+ParkingSlot --> MechanicalBicycle
+ParkingSlot --> ElectricalBicycle
+User --> CreditCard
+User --> RegistrationCard
+@enduml
