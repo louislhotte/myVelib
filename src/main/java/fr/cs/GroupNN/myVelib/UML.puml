@@ -22,6 +22,7 @@ class Bicycle {
     - bicycleId: int
     - bicycleLocation: (double, double)
     - status: String
+    - bicycleType: String
     + Bicycle()
 }
 
@@ -30,7 +31,6 @@ class MechanicalBicycle {
 }
 
 class ElectricalBicycle {
-
 }
 
 class User {
@@ -55,6 +55,10 @@ class RegistrationCard {
 }
 
 class terminal {
+    - duration : int
+    - bicycle: Bicycle
+    - user: User
+    + isParkedInDockStation()
     + calculateCost()
 }
 

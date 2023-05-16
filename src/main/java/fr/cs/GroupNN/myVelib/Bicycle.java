@@ -1,47 +1,39 @@
 package fr.cs.GroupNN.myVelib;
 
-public class Bicycle {
-    private int BicycleId;
-    private double BicycleLatitude;
-    private double BicycleLongitude;
-    private String BicycleType;
+import java.util.List;
 
-    public Bicycle(int bicycleId, double bicycleLatitude, double bicycleLongitude, String bicycleType) {
-        BicycleId = bicycleId;
-        BicycleLatitude = bicycleLatitude;
-        BicycleLongitude = bicycleLongitude;
-        BicycleType = bicycleType;
+public class Bicycle {
+    private int bicycleId;
+    private double[] bicycleLocation;
+    private String bicycleType;
+
+    public Bicycle(int bicycleId, double[] bicycleLocation, String bicycleType) {
+        this.bicycleId = bicycleId;
+        this.bicycleLocation = bicycleLocation;
+        this.bicycleType = bicycleType;
     }
 
     public int getBicycleId() {
-        return BicycleId;
+        return bicycleId;
     }
 
     public void setBicycleId(int bicycleId) {
-        BicycleId = bicycleId;
+        this.bicycleId = bicycleId;
     }
 
-    public double getBicycleLatitude() {
-        return BicycleLatitude;
+    public double[] getBicycleLocation() {
+        return bicycleLocation;
     }
 
-    public void setBicycleLatitude(double bicycleLatitude) {
-        BicycleLatitude = bicycleLatitude;
-    }
-
-    public double getBicycleLongitude() {
-        return BicycleLongitude;
-    }
-
-    public void setBicycleLongitude(double bicycleLongitude) {
-        BicycleLongitude = bicycleLongitude;
+    public void setBicycleLocation(double[] bicycleLocation) {
+        this.bicycleLocation = bicycleLocation;
     }
 
     public String getBicycleType() {
-        return BicycleType;
+        return bicycleType;
     }
 
     public void setBicycleType(String bicycleType) {
-        BicycleType = bicycleType;
+        this.bicycleType = bicycleType;
     }
 }

@@ -1,86 +1,72 @@
 package fr.cs.GroupNN.myVelib;
 
-import java.util.List;
-
 public class DockingStation {
-    private double DockingStationLatitude;
-    private double DockingStationLongitude;
-    private String DockingStationStatus;
-    private String StationType;
-    private int DockingStationId;
-    private List<ParkingSlot> parkingSlots;
+    private int id;
+    private double[] dockingStationLocation;
+    private String stationType;
+    private ParkingSlot[] slots;
     private Terminal terminal;
+    private boolean onService;
 
-    public DockingStation(double dockingStationLatitude, double dockingStationLongitude, String dockingStationStatus, String StationType, int dockingStationId, List<ParkingSlot> parkingSlots) {
-        DockingStationLatitude = dockingStationLatitude;
-        DockingStationLongitude = dockingStationLongitude;
-        DockingStationStatus = dockingStationStatus;
-        this.StationType = StationType;
-        DockingStationId = dockingStationId;
-        this.parkingSlots = parkingSlots;
+    public DockingStation(int id, double[] dockingStationLocation, String stationType, ParkingSlot[] slots, Terminal terminal) {
+        this.id = id;
+        this.dockingStationLocation = dockingStationLocation;
+        this.stationType = stationType;
+        this.slots = slots;
+        this.terminal = terminal;
+        this.onService = false;
     }
 
-    public double getDockingStationLatitude() {
-        return DockingStationLatitude;
+    public void earnCredit() {
+        // Implement the functionality to earn credit for the docking station here
     }
 
-    public void setDockingStationLatitude(double dockingStationLatitude) {
-        DockingStationLatitude = dockingStationLatitude;
+    // Getters and setters for private fields
+    public int getId() {
+        return id;
     }
 
-    public double getDockingStationLongitude() {
-        return DockingStationLongitude;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setDockingStationLongitude(double dockingStationLongitude) {
-        DockingStationLongitude = dockingStationLongitude;
+    public double[] getDockingStationLocation() {
+        return dockingStationLocation;
     }
 
-    public String getDockingStationStatus() {
-        return DockingStationStatus;
-    }
-
-    public void setDockingStationStatus(String dockingStationStatus) {
-        DockingStationStatus = dockingStationStatus;
+    public void setDockingStationLocation(double[] dockingStationLocation) {
+        this.dockingStationLocation = dockingStationLocation;
     }
 
     public String getStationType() {
-        return StationType;
+        return stationType;
     }
 
     public void setStationType(String stationType) {
-        this.StationType = stationType;
+        this.stationType = stationType;
     }
 
-    public int getDockingStationId() {
-        return DockingStationId;
+    public ParkingSlot[] getSlots() {
+        return slots;
     }
 
-    public void setDockingStationId(int dockingStationId) {
-        DockingStationId = dockingStationId;
+    public void setSlots(ParkingSlot[] slots) {
+        this.slots = slots;
     }
 
-    public List<ParkingSlot> getParkingSlots() {
-        return parkingSlots;
+    public Terminal getTerminal() {
+        return terminal;
     }
 
-    public void setParkingSlots(List<ParkingSlot> parkingSlots) {
-        this.parkingSlots = parkingSlots;
+    public void setTerminal(Terminal terminal) {
+        this.terminal = terminal;
     }
 
-
-    public class Terminal {
-        public void rentBicycle() {
-            // code to rent a bicycle
-        }
-
-        public void dropBicycle() {
-            // code to drop a bicycle
-        }
-
-        public void displayStatus() {
-            // code to display the status of the docking station
-        }
+    public boolean isOnService() {
+        return onService;
     }
 
+    public void setOnService(boolean onService) {
+        this.onService = onService;
+    }
 }
