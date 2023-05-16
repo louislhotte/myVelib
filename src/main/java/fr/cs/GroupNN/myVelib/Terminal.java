@@ -16,7 +16,7 @@ public class Terminal {
         this.duration = duration;
         this.bicycle = bicycle;
         this.user = user;
-        this.wasParkedInDockStation = wasParkedInDockStation;
+        this.wasParkedInDockStation = true; //Regarder comment implémenter avec data...
     }
 
 
@@ -46,7 +46,7 @@ public class Terminal {
                 } else if (bicycle.getBicycleType().equals("electrical")) {
                     cost = duration / 60.0 * 2;
                 }
-            } else if (user.getRegistrationCard().getRegistrationType() == "VLIBRE") {
+            } else if (user.getRegistrationCard().getRegistrationType().equals("VLIBRE")) {
                 int freeHour = 60;
                 if (duration <= freeHour) {
                     cost = 0;
@@ -64,7 +64,7 @@ public class Terminal {
                     timeCredit = Math.max(timeCredit - (duration - freeHour), 0);
                     user.setUserTimeCreditBalance(timeCredit);
                 }
-            } else if (user.getRegistrationCard().getRegistrationType() == "VMAX") {
+            } else if (user.getRegistrationCard().getRegistrationType().equals("VMAX")) {
                 int freeHour = 60;
                 if (duration > freeHour) {
                     int durationExcess = duration - freeHour;
