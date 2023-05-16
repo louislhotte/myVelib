@@ -1,6 +1,7 @@
 package fr.cs.GroupNN.myVelib;
 
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,6 +83,35 @@ public class Terminal {
 
         return cost;
     }
+
+
+    public void rentBicycle(DockingStation dockingStation, User user) {
+        if (user.getRentedBicycle() != null) {
+            System.out.println("User already has a rented bicycle. Cannot rent another one.");
+            return;
+        }
+
+        if (!dockingStation.isOnService()) {
+            System.out.println("The docking station is currently off-duty. Cannot rent a bicycle.");
+            return;
+        }
+
+        if (dockingStation.getSlots() == null) {
+            System.out.println("No available bikes at the docking station. Cannot rent a bicycle.");
+            return;
+        }
+
+        // Rent the first available bike from the docking station
+        Bicycle rentedBicycle = dockingStation.rentBike();
+
+        // Update user's information
+        user.setRentedBicycle(rentedBicycle);
+        user.setRentDateTime(LocalDateTime.now());
+        user.getListOfUsedBicycleIds().add(rentedBicycle.getBicycleId());
+
+        System.out.println("Bicycle rented successfully.");
+    }
+
 
 
 }

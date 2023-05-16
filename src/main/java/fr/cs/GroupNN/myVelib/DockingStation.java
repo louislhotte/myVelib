@@ -69,4 +69,9 @@ public class DockingStation {
     public void setOnService(boolean onService) {
         this.onService = onService;
     }
+
+    public Bicycle rentBike() {
+        // method to rent a Bike and reserve a parking Slot
+        return null;
+    }
 }
