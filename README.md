@@ -1,2 +1,2 @@
 # myVelib
-Projet Génie Logiciel 2.6 (2023)
+Project Object Oriented Programming 2.6 (2023)
