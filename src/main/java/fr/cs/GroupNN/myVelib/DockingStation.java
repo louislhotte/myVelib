@@ -7,6 +7,7 @@ public class DockingStation {
     private ParkingSlot[] slots;
     private Terminal terminal;
     private boolean onService;
+    private static ArrayList<DockingStation> dockingStations = new ArrayList<DockingStation>();
 
     public DockingStation(int id, double[] dockingStationLocation, String stationType, ParkingSlot[] slots, Terminal terminal) {
         this.id = id;
@@ -15,6 +16,7 @@ public class DockingStation {
         this.slots = slots;
         this.terminal = terminal;
         this.onService = false;
+        dockingStations.add(this);
     }
 
     public void earnCredit() {
@@ -73,5 +75,31 @@ public class DockingStation {
     public Bicycle rentBike() {
         // method to rent a Bike and reserve a parking Slot
         return null;
+    }
+
+    public boolean oneFree() {
+        boolean atLeastOneFree = false;
+        for(ParkingSlot parkingSlot: slots){
+            if (parkingSlot.isFree()){
+                atLeastOneFree = true;
+                break;
+            }
+        }
+        return atLeastOneFree;
+    }
+
+    public boolean oneBike(){
+        boolean atLeastOneBike = false;
+        for(ParkingSlot parkingSlot: slots){
+            if (!parkingSlot.isFree()){
+                atLeastOneBike = true;
+                break;
+            }
+        }
+        return atLeastOneBike;
+    }
+
+    public static ArrayList<DockingStation> getDockingStations(){
+        return dockingStations;
     }
 }
