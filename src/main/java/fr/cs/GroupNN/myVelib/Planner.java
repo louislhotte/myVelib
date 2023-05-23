@@ -4,12 +4,15 @@ public class Planner{
     // fields
     private double[] startLocation;
     private double[] endLocation;
+    private String bicycleType;
+    private PlanningPolicy policy;
 
     // connstructor
-    public Planner(double[] startLocation, double[ endLocation]){
+    public Planner(double[] startLocation, double[ endLocation], PlanningPolicy policy){
         super();
         this.setStartLocation(startLocation);
         this.setEndLocation(endLocation);
+        this.policy = policy;
     }
 
     // getters and setters
@@ -30,26 +33,7 @@ public class Planner{
     }
 
     // other methods
-    public double[][] optimalItinerary(){
-        ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();
-
-        DockingStation nearestToStart = dockingStations.get(0);
-        DockingStation nearestToEnd = dockingStations.get(0);
-
-        double[] nearestToStartLocation = nearestToStart.getDockingStationLocation();
-        double[] nearestToEndLocation = nearestToEnd.getDockingStationLocation();
-
-        for(DockingStation dockingStation: dockingStations){
-            if (!dockingStation.isOnService())
-                continue;
-            if (dockingStation.oneBike() && distance(dockingStation.getDockingStationLocation(), startLocation) < distance(nearestToStartLocation, startLocation)){
-                nearestToStart = dockingStation;
-                nearestToStartLocation = nearestToStart.getDockingStationLocation();
-            }
-            if (dockingStation.oneFree() && distance(dockingStation.getDockingStationLocation(), endLocation) < distance(nearestToEndLocation, endLocation)){
-                nearestToEnd = dockingStation;
-                nearestToEndLocation = nearestToEnd.getDockingStationLocation();
-            }
-        }
+    public DockingStation[] optimalItinerary(){
+        return policy.optimalItinerary(startLocation, endLocation, bicycleType);
     }
 }

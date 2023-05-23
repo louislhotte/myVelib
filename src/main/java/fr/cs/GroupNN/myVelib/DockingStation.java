@@ -80,6 +80,8 @@ public class DockingStation {
     public boolean oneFree() {
         boolean atLeastOneFree = false;
         for(ParkingSlot parkingSlot: slots){
+            if (parkingSlot.isOutOfOrder)
+                continue;
             if (parkingSlot.isFree()){
                 atLeastOneFree = true;
                 break;
@@ -88,15 +90,41 @@ public class DockingStation {
         return atLeastOneFree;
     }
 
-    public boolean oneBike(){
+    public boolean oneBike(String bicycleType){
         boolean atLeastOneBike = false;
         for(ParkingSlot parkingSlot: slots){
-            if (!parkingSlot.isFree()){
+            if (parkingSlot.isOutOfOrder)
+                continue;
+            if (!parkingSlot.isFree() && parkingSlot.getBicycle().getBicycleType() == bicycleType){
                 atLeastOneBike = true;
                 break;
             }
         }
         return atLeastOneBike;
+    }
+
+    public int getBikesNumber(String bicycleType){
+        int bikesNumber = 0;
+        for(ParkingSlot parkingSlot: slots){
+            if (parkingSlot.isOutOfOrder)
+                continue;
+            if (!parkingSlot.isFree() && parkingSlot.getBicycle().getBicycleType() == bicycleType){
+                bikesNumber++;
+            }
+        }
+        return bikesNumber;
+    }
+
+    public int getFreeSlotsNumber(){
+        int freeSlotsNumber = 0;
+        for(ParkingSlot parkingSlot: slots){
+            if (parkingSlot.isOutOfOrder)
+                continue;
+            if (parkingSlot.isFree()){
+                freeSlotsNumber++;
+            }
+        }
+        return freeSlotsNumber;
     }
 
     public static ArrayList<DockingStation> getDockingStations(){
