@@ -1,5 +1,7 @@
 package fr.cs.GroupNN.myVelib;
 
+import java.util.ArrayList;
+
 public class Planner{
     // fields
     private double[] startLocation;
@@ -8,7 +10,7 @@ public class Planner{
     private PlanningPolicy policy;
 
     // connstructor
-    public Planner(double[] startLocation, double[ endLocation], PlanningPolicy policy){
+    public Planner(double[] startLocation, double[] endLocation, PlanningPolicy policy){
         super();
         this.setStartLocation(startLocation);
         this.setEndLocation(endLocation);

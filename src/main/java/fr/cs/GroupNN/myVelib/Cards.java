@@ -1,7 +1,7 @@
 package fr.cs.GroupNN.myVelib;
 
 public class Cards {
-    // Vlibre and Vmax are the two registration types
+    // VLIBRE and VMAX are the two registration types
     private String registrationType;
 
     public Cards(String registrationType) {
