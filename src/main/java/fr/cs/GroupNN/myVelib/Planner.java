@@ -9,7 +9,7 @@ public class Planner{
     private String bicycleType;
     private PlanningPolicy policy;
 
-    // connstructor
+    // constructor
     public Planner(double[] startLocation, double[] endLocation, PlanningPolicy policy){
         super();
         this.setStartLocation(startLocation);
@@ -35,7 +35,7 @@ public class Planner{
     }
 
     // other methods
-    public DockingStation[] optimalItinerary(){
+    public double[][] optimalItinerary(){
         return policy.optimalItinerary(startLocation, endLocation, bicycleType);
     }
 }

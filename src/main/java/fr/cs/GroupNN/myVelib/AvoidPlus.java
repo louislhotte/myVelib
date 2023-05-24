@@ -1,8 +1,10 @@
 package fr.cs.GroupNN.myVelib;
 
+import java.util.*;
+
 public class AvoidPlus implements PlanningPolicy{
     @Override
-    public DockingStation[] optimalItinerary(double[] startLocation,double[] endLocation, String bicycleType){
+    public double[][] optimalItinerary(double[] startLocation,double[] endLocation, String bicycleType){
         ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();
 
         DockingStation nearestToStart = dockingStations.get(0);
@@ -23,6 +25,6 @@ public class AvoidPlus implements PlanningPolicy{
                 nearestToEndLocation = nearestToEnd.getDockingStationLocation();
             }
         }
-        return {nearestToStart, nearestToEnd};
+        return new double[][]{nearestToStartLocation, nearestToEndLocation};
     }
 }

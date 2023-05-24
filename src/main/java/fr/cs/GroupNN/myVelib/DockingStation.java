@@ -1,5 +1,7 @@
 package fr.cs.GroupNN.myVelib;
 
+import java.util.*;
+
 public class DockingStation {
     private int id;
     private double[] dockingStationLocation;
@@ -80,7 +82,7 @@ public class DockingStation {
     public boolean oneFree() {
         boolean atLeastOneFree = false;
         for(ParkingSlot parkingSlot: slots){
-            if (parkingSlot.isOutOfOrder)
+            if (parkingSlot.isOutOfOrder())
                 continue;
             if (parkingSlot.isFree()){
                 atLeastOneFree = true;
@@ -93,7 +95,7 @@ public class DockingStation {
     public boolean oneBike(String bicycleType){
         boolean atLeastOneBike = false;
         for(ParkingSlot parkingSlot: slots){
-            if (parkingSlot.isOutOfOrder)
+            if (parkingSlot.isOutOfOrder())
                 continue;
             if (!parkingSlot.isFree() && parkingSlot.getBicycle().getBicycleType() == bicycleType){
                 atLeastOneBike = true;
@@ -106,7 +108,7 @@ public class DockingStation {
     public int getBikesNumber(String bicycleType){
         int bikesNumber = 0;
         for(ParkingSlot parkingSlot: slots){
-            if (parkingSlot.isOutOfOrder)
+            if (parkingSlot.isOutOfOrder())
                 continue;
             if (!parkingSlot.isFree() && parkingSlot.getBicycle().getBicycleType() == bicycleType){
                 bikesNumber++;
@@ -118,13 +120,31 @@ public class DockingStation {
     public int getFreeSlotsNumber(){
         int freeSlotsNumber = 0;
         for(ParkingSlot parkingSlot: slots){
-            if (parkingSlot.isOutOfOrder)
+            if (parkingSlot.isOutOfOrder())
                 continue;
             if (parkingSlot.isFree()){
                 freeSlotsNumber++;
             }
         }
         return freeSlotsNumber;
+    }
+
+    private static boolean equalLocation(double[] point1, double[] point2){
+        if(point1[0] == point2[0] && point1[1] == point2[1])
+            return true;
+        return false;
+    }
+
+    public static DockingStation getDockingStationFromLocation(double[] location){
+        DockingStation locatedDockingStation = null;
+        for (DockingStation dockingStation: dockingStations){
+            double[] currentDockingStationLocation = dockingStation.getDockingStationLocation();
+            if(equalLocation(currentDockingStationLocation, location)) {
+                locatedDockingStation = dockingStation;
+                break;
+            }
+        }
+        return locatedDockingStation;
     }
 
     public static ArrayList<DockingStation> getDockingStations(){
