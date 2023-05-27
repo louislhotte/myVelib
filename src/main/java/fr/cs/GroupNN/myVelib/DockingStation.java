@@ -95,25 +95,41 @@ public class DockingStation {
         this.dropping = dropping;
     }
 
-    public Bicycle rentBike(DockingStation dockingStation) {
-        if (dockingStation.getSlots()) {
-            System.out.println("No available bikes at the docking station.");
+    public Bicycle rentBike() {
+        boolean bikeInDockingStation = false;
+        ParkingSlot selectedParkingSlot = null;
+
+        for(ParkingSlot parkingSlot: slots){
+            if (!parkingSlot.isOutOfOrder()){
+                if (parkingSlot.isOccupied()){
+                    bikeInDockingStation = true;
+                    selectedParkingSlot = parkingSlot;
+                    break;
+                }
+            }
+        }
+
+        if (!bikeInDockingStation) {
+            System.out.println("No available bikes for rent at this docking station.");
             return null;
         }
 
         // Check if there is a free and on-duty parking slot
-        ParkingSlot freeParkingSlot = findFreeParkingSlot();
-        if (freeParkingSlot == null) {
-            System.out.println("No free parking slot available at the docking station.");
-            return null;
-        }
+//        ParkingSlot freeParkingSlot = findFreeParkingSlot();
+//        if (freeParkingSlot == null) {
+//            System.out.println("No free parking slot available at the docking station.");
+//            return null;
+//        }
 
         // Remove the bike from the slots
-        Bicycle rentedBicycle = slots.remove(0);
+        Bicycle rentedBicycle = selectedParkingSlot.getBicycle();
+        selectedParkingSlot.setBicycle(null);
 
         // Occupy the parking slot with the rented bike
-        freeParkingSlot.setOccupied(true);
-        freeParkingSlot.setBicycle(rentedBicycle);
+        selectedParkingSlot.setOccupied(false);
+        selectedParkingSlot.setFree(true);
+
+//        freeParkingSlot.setBicycle(rentedBicycle);
 
         System.out.println("Bike rented successfully.");
         renting++;
@@ -129,7 +145,7 @@ public class DockingStation {
         return;
     }
 
-    private ParkingSlot findFreeParkingSlot() {
+    private ParkingSlot findOccupiedParkingSlot() {
         for (ParkingSlot parkingSlot : slots) {
             if (parkingSlot.isFree() && !parkingSlot.isOutOfOrder()) {
                 return parkingSlot;
