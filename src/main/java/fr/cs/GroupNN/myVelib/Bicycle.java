@@ -1,5 +1,6 @@
 package fr.cs.GroupNN.myVelib;
 
+import javax.print.Doc;
 import java.util.*;
 
 public abstract class Bicycle {
@@ -9,10 +10,12 @@ public abstract class Bicycle {
     private static ArrayList<Bicycle> streetBicycles = new ArrayList<Bicycle>();
 
     public Bicycle(int bicycleId, double[] bicycleLocation, String bicycleType) {
+        super();
         this.bicycleId = bicycleId;
         this.bicycleLocation = bicycleLocation;
         this.bicycleType = bicycleType;
         boolean inDockingStation = false;
+        List<DockingStation> dockingStations = DockingStation.getDockingStations();
         for(DockingStation dockingStation: dockingStations){
             if (equals(bicycleLocation,dockingStation.getDockingStationLocation()))
                 inDockingStation = true;

@@ -12,6 +12,7 @@ public class DockingStation {
     private static ArrayList<DockingStation> dockingStations = new ArrayList<DockingStation>();
 
     public DockingStation(int id, double[] dockingStationLocation, String stationType, ParkingSlot[] slots, Terminal terminal) {
+        super();
         this.id = id;
         this.dockingStationLocation = dockingStationLocation;
         this.stationType = stationType;
@@ -100,8 +101,8 @@ public class DockingStation {
     }
 
     private ParkingSlot findFreeParkingSlot() {
-        for (ParkingSlot parkingSlot : parkingSlot[]) {
-            if (parkingSlot.isFree() && parkingSlot.isOnDuty()) {
+        for (ParkingSlot parkingSlot : slots) {
+            if (parkingSlot.isFree() && !parkingSlot.isOutOfOrder()) {
                 return parkingSlot;
             }
         }

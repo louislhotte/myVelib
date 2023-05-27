@@ -34,11 +34,8 @@ public class ParkingSlot {
         this.bicycle = bicycle;
     }
 
-    public boolean isFree(ParkingSlot parkingSlot) {
-        if (parkingSlot.free == true) {
-            return true;
-        }
-        return false;
+    public boolean isFree() {
+        return free;
     };
 
     public void setFree(boolean free) {
