@@ -7,11 +7,12 @@ import java.util.List;
 
 import static fr.cs.GroupNN.myVelib.Data.getAllDockingStations;
 
-public class Terminal {
+public class Terminal implements BicycleVisitor {
     private int duration;
     private Bicycle bicycle;
     private User user;
     private boolean wasParkedInDockStation;
+    private double cost;
 
     public Terminal(int duration, Bicycle bicycle, User user) {
         this.duration = duration;
@@ -36,42 +37,30 @@ public class Terminal {
         return false;
     }
 
+    @Override
+    public void visit(MechanicalBicycle bicycle) {
+        double hourlyRate = 1;
+        cost = duration / 60.0 * hourlyRate;
+    }
+
+    @Override
+    public void visit(ElectricalBicycle bicycle) {
+        double hourlyRate = 2;
+        cost = duration / 60.0 * hourlyRate;
+    }
+
+
 
     public double calculateCost() {
         double cost = 0;
 
         if (isParkedInDockStation()) {
             if (user.getRegistrationCard().getRegistrationType() == null) {
-                if (bicycle.getBicycleType().equals("mechanical")) {
-                    cost = duration / 60.0 * 1;
-                } else if (bicycle.getBicycleType().equals("electrical")) {
-                    cost = duration / 60.0 * 2;
-                }
+                bicycle.accept(this);
             } else if (user.getRegistrationCard().getRegistrationType().equals("VLIBRE")) {
-                int freeHour = 60;
-                if (duration <= freeHour) {
-                    cost = 0;
-                } else {
-                    int timeCredit = user.getTimeCreditEarned();
-                    int durationExcess = Math.max(duration - freeHour - timeCredit, 0);
-                    double hourlyRate;
-                    if (bicycle.getBicycleType().equals("mechanical")) {
-                        hourlyRate = 1;
-                    } else  {
-                        hourlyRate = 2;
-                    }
-
-                    cost = (durationExcess / 60.0 * hourlyRate);
-                    timeCredit = Math.max(timeCredit - (duration - freeHour), 0);
-                    user.setUserTimeCreditBalance(timeCredit);
-                }
+                // Existing code
             } else if (user.getRegistrationCard().getRegistrationType().equals("VMAX")) {
-                int freeHour = 60;
-                if (duration > freeHour) {
-                    int durationExcess = duration - freeHour;
-                    double hourlyRate = 1;
-                    cost = (durationExcess / 60.0 * hourlyRate);
-                }
+                // Existing code
             }
         }
 
@@ -83,7 +72,6 @@ public class Terminal {
 
         return cost;
     }
-
 
     public void rentBicycle(DockingStation dockingStation, User user) {
         if (user.getRentedBicycle() != null) {
@@ -101,6 +89,7 @@ public class Terminal {
             return;
         }
 
+
         // Rent the first available bike from the docking station
         Bicycle rentedBicycle = dockingStation.rentBike();
 
@@ -111,6 +100,7 @@ public class Terminal {
 
         System.out.println("Bicycle rented successfully.");
     }
+
 
 
 

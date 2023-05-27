@@ -2,7 +2,7 @@ package fr.cs.GroupNN.myVelib;
 
 import java.util.*;
 
-public class Bicycle {
+public abstract class Bicycle {
     private int bicycleId;
     private double[] bicycleLocation;
     private String bicycleType;
@@ -55,4 +55,8 @@ public class Bicycle {
     public static ArrayList<Bicycle> getStreetBicycles() {
         return streetBicycles;
     }
+
+    public abstract void accept(BicycleVisitor visitor);
 }
+
+

@@ -74,8 +74,37 @@ public class DockingStation {
         this.onService = onService;
     }
 
-    public Bicycle rentBike() {
-        // method to rent a Bike and reserve a parking Slot
+    public Bicycle rentBike(DockingStation dockingStation) {
+        if (dockingStation.getSlots()) {
+            System.out.println("No available bikes at the docking station.");
+            return null;
+        }
+
+        // Check if there is a free and on-duty parking slot
+        ParkingSlot freeParkingSlot = findFreeParkingSlot();
+        if (freeParkingSlot == null) {
+            System.out.println("No free parking slot available at the docking station.");
+            return null;
+        }
+
+        // Remove the bike from the slots
+        Bicycle rentedBicycle = slots.remove(0);
+
+        // Occupy the parking slot with the rented bike
+        freeParkingSlot.setOccupied(true);
+        freeParkingSlot.setBicycle(rentedBicycle);
+
+        System.out.println("Bike rented successfully.");
+
+        return rentedBicycle;
+    }
+
+    private ParkingSlot findFreeParkingSlot() {
+        for (ParkingSlot parkingSlot : parkingSlot[]) {
+            if (parkingSlot.isFree() && parkingSlot.isOnDuty()) {
+                return parkingSlot;
+            }
+        }
         return null;
     }
 
