@@ -137,4 +137,10 @@ public class User {
     public void setListOfUsedBicycleIds(ArrayList<Integer> listOfUsedBicycleIds) {
         this.listOfUsedBicycleIds = listOfUsedBicycleIds;
     }
+
+    public void addToTotalCharges(double charges){
+        double currentTotalCharges = this.getTotalCharges();
+        double newTotalCharges = currentTotalCharges + charges;
+        this.setTotalCharges(newTotalCharges);
+    }
 }

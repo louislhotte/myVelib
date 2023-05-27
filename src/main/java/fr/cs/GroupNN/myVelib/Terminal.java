@@ -1,10 +1,8 @@
 package fr.cs.GroupNN.myVelib;
 
-
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-
 
 public class Terminal implements BicycleVisitor {
     private int duration;
@@ -89,7 +87,6 @@ public class Terminal implements BicycleVisitor {
             return;
         }
 
-
         // Rent the first available bike from the docking station
         Bicycle rentedBicycle = dockingStation.rentBike();
 
@@ -100,9 +97,4 @@ public class Terminal implements BicycleVisitor {
 
         System.out.println("Bicycle rented successfully.");
     }
-
-
-
-
 }
-
