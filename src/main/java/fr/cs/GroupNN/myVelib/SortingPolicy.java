@@ -1,5 +1,7 @@
 package fr.cs.GroupNN.myVelib;
 
-public interface SortingPolicy {
+import java.util.ArrayList;
 
+public interface SortingPolicy {
+    void sortDockingStations();
 }

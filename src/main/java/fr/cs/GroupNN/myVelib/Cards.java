@@ -5,6 +5,7 @@ public class Cards {
     private String registrationType;
 
     public Cards(String registrationType) {
+        super();
         this.registrationType = registrationType;
     }
 

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static fr.cs.GroupNN.myVelib.Data.getAllDockingStations;
 
 public class Terminal implements BicycleVisitor {
     private int duration;
@@ -15,6 +14,7 @@ public class Terminal implements BicycleVisitor {
     private double cost;
 
     public Terminal(int duration, Bicycle bicycle, User user) {
+        super();
         this.duration = duration;
         this.bicycle = bicycle;
         this.user = user;
@@ -25,7 +25,7 @@ public class Terminal implements BicycleVisitor {
 
     public boolean isParkedInDockStation() {
         double[] bicycleLocation = bicycle.getBicycleLocation();
-        List<DockingStation> dockingStations = getAllDockingStations();
+        List<DockingStation> dockingStations = DockingStation.getDockingStations();
 
         for (DockingStation dockingStation : dockingStations) {
             double[] dockingStationLocation = dockingStation.getDockingStationLocation();

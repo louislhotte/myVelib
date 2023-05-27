@@ -10,6 +10,8 @@ public class DockingStation {
     private Terminal terminal;
     private boolean onService;
     private static ArrayList<DockingStation> dockingStations = new ArrayList<DockingStation>();
+    private int renting;
+    private int dropping;
 
     public DockingStation(int id, double[] dockingStationLocation, String stationType, ParkingSlot[] slots, Terminal terminal) {
         super();
@@ -19,6 +21,8 @@ public class DockingStation {
         this.slots = slots;
         this.terminal = terminal;
         this.onService = false;
+        this.renting = 0;
+        this.dropping = 0;
         dockingStations.add(this);
     }
 
@@ -75,6 +79,22 @@ public class DockingStation {
         this.onService = onService;
     }
 
+    public int getRenting() {
+        return renting;
+    }
+
+    public void setRenting(int renting) {
+        this.renting = renting;
+    }
+
+    public int getDropping() {
+        return dropping;
+    }
+
+    public void setDropping(int dropping) {
+        this.dropping = dropping;
+    }
+
     public Bicycle rentBike(DockingStation dockingStation) {
         if (dockingStation.getSlots()) {
             System.out.println("No available bikes at the docking station.");
@@ -96,8 +116,17 @@ public class DockingStation {
         freeParkingSlot.setBicycle(rentedBicycle);
 
         System.out.println("Bike rented successfully.");
+        renting++;
 
         return rentedBicycle;
+    }
+
+    public void parkBike(){
+        // TO COMPLETE
+        //.....................................................
+
+        dropping++;
+        return;
     }
 
     private ParkingSlot findFreeParkingSlot() {

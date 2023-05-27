@@ -8,6 +8,7 @@ public class ParkingSlot {
     private boolean occupied;
 
     public ParkingSlot(int parkingSlotId, Bicycle bicycle, boolean free, boolean outOfOrder, boolean occupied) {
+        super();
         ParkingSlotId = parkingSlotId;
         this.bicycle = bicycle;
         this.free = free;
