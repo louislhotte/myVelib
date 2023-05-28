@@ -47,8 +47,11 @@ public class Main {
             System.out.println("No optimal itinerary found.");
         }
 
-        DockingStation dockingStationStart = getDockingStationFromLocation;
+        DockingStation dockingStationStart = DockingStation.getDockingStationFromLocation(startLocation);
+        DockingStation dockingStationEnd = DockingStation.getDockingStationFromLocation(endLocation);
 
+        dockingStationStart.getTerminal().rentBicycle(dockingStationStart, user, "mechanical");
+        dockingStationStart.getTerminal().parkBicycle(dockingStationEnd, user);
 
     }
 }
