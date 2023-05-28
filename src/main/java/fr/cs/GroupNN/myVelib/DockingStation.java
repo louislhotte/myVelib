@@ -116,13 +116,6 @@ public class DockingStation {
             return null;
         }
 
-        // Check if there is a free and on-duty parking slot
-//        ParkingSlot freeParkingSlot = findFreeParkingSlot();
-//        if (freeParkingSlot == null) {
-//            System.out.println("No free parking slot available at the docking station.");
-//            return null;
-//        }
-
         // Remove the bike from the slots
         Bicycle rentedBicycle = selectedParkingSlot.getBicycle();
         selectedParkingSlot.setBicycle(null);

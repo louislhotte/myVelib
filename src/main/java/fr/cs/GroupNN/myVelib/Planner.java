@@ -10,10 +10,11 @@ public class Planner{
     private PlanningPolicy policy;
 
     // constructor
-    public Planner(double[] startLocation, double[] endLocation, PlanningPolicy policy){
+    public Planner(double[] startLocation, double[] endLocation, String bicycleType, PlanningPolicy policy){
         super();
         this.setStartLocation(startLocation);
         this.setEndLocation(endLocation);
+        this.bicycleType = bicycleType;
         this.policy = policy;
     }
 
