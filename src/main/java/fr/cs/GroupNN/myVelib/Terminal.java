@@ -8,16 +8,13 @@ public class Terminal implements BicycleVisitor {
     private int duration;
     private Bicycle bicycle;
     private User user;
-    private boolean wasParkedInDockStation;
-    private double cost;
 
     public Terminal(int duration, Bicycle bicycle, User user) {
-        super();
         this.duration = duration;
         this.bicycle = bicycle;
         this.user = user;
-        this.wasParkedInDockStation = true; //Regarder comment implémenter avec data...
     }
+
 
 
 
@@ -37,39 +34,59 @@ public class Terminal implements BicycleVisitor {
 
     @Override
     public void visit(MechanicalBicycle bicycle) {
-        double hourlyRate = 1;
-        cost = duration / 60.0 * hourlyRate;
+        double hourlyRate = bicycle.getHourlyRate();
     }
 
     @Override
     public void visit(ElectricalBicycle bicycle) {
-        double hourlyRate = 2;
-        cost = duration / 60.0 * hourlyRate;
+        double hourlyRate = bicycle.getHourlyRate();
     }
-
 
 
     public double calculateCost() {
         double cost = 0;
+        if (user != null && user.getRegistrationCard() != null) {
+            String registrationType = user.getRegistrationCard().getRegistrationType();
+            int timeCredit = user.getTimeCreditEarned();
+            int freeHour = 60;
 
-        if (isParkedInDockStation()) {
-            if (user.getRegistrationCard().getRegistrationType() == null) {
-                bicycle.accept(this);
-            } else if (user.getRegistrationCard().getRegistrationType().equals("VLIBRE")) {
-                // Existing code
-            } else if (user.getRegistrationCard().getRegistrationType().equals("VMAX")) {
-                // Existing code
+            double hourlyRate;
+            if (bicycle instanceof MechanicalBicycle) {
+                hourlyRate = ((MechanicalBicycle) bicycle).getHourlyRate();
+            } else if (bicycle instanceof ElectricalBicycle) {
+                hourlyRate = ((ElectricalBicycle) bicycle).getHourlyRate();
+            } else {
+                return cost; // Return 0 if the bicycle type is unknown
+            }
+
+            if (registrationType.equals("VLIBRE")) {
+                int durationExcess = Math.max(duration - freeHour, 0);
+                int effectiveDuration = Math.max(durationExcess - timeCredit, 0);
+
+                cost = (effectiveDuration / 60.0) * hourlyRate;
+
+                timeCredit = Math.max(timeCredit - durationExcess, 0);
+                user.setUserTimeCreditBalance(timeCredit);
+            } else if (registrationType.equals("VMAX")) {
+                int durationExcess = Math.max(duration - freeHour, 0);
+
+                if (duration >= 60) {
+                    cost = 1 + (durationExcess / 60.0) * hourlyRate;
+                } else if (duration < 60) {
+                    cost = (duration * hourlyRate) / 60.0;
+                }
+
+                timeCredit = Math.max(timeCredit - durationExcess, 0);
+                user.setUserTimeCreditBalance(timeCredit);
+            } else {
+                cost = (duration * hourlyRate) / 60.0;
             }
         }
-
-        if (!wasParkedInDockStation && isParkedInDockStation()) {
-            return cost * 0.9;
-        } else if (!isParkedInDockStation()) {
-            return cost * 1.1;
-        }
-
         return cost;
     }
+
+
+
 
     public void rentBicycle(DockingStation dockingStation, User user) {
         if (user.getRentedBicycle() != null) {
