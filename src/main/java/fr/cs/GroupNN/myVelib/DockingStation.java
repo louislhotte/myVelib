@@ -157,8 +157,6 @@ public class DockingStation {
             return;
         }
 
-        // selectedParkingSlot ...............................................................
-
         // Remove the bike from the slots
         selectedParkingSlot.setBicycle(bicycle);
 

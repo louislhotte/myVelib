@@ -66,7 +66,7 @@ public class Terminal implements BicycleVisitor {
         return cost;
     }
 
-    public void rentBicycle(DockingStation dockingStation, User user) {
+    public void rentBicycle(DockingStation dockingStation, User user, String bicycleType) {
         if (user.getRentedBicycle() != null) {
             System.out.println("User already has a rented bicycle. Cannot rent another one.");
             return;
@@ -77,7 +77,7 @@ public class Terminal implements BicycleVisitor {
             return;
         }
 
-        if (dockingStation.getSlots() == null) {
+        if (!dockingStation.oneBike(bicycleType)) {
             System.out.println("No available bikes at the docking station. Cannot rent a bicycle.");
             return;
         }
@@ -93,7 +93,45 @@ public class Terminal implements BicycleVisitor {
         System.out.println("Bicycle rented successfully.");
     }
 
-    public int calculateDuration(User user) {
+    public void parkBicycle(DockingStation dockingStation, User user) {
+        Bicycle bicycle = user.getRentedBicycle();
+
+        if (bicycle == null){
+            System.out.println("User does not have a bicycle to park.");
+            return;
+        }
+
+        if (!dockingStation.isOnService()) {
+            System.out.println("The docking station is currently off-duty. Cannot park a bicycle.");
+            return;
+        }
+
+        // park the bike (if there exists a free slot (the condition is handled in parkBike))
+        dockingStation.parkBike(bicycle);
+
+        // Update user's information
+        user.setParkDateTime(LocalDateTime.now());
+
+        int rentTime = calculateDuration(user);
+        double costOfTheRide = this.calculateCost(user, rentTime);
+
+        user.setRentedBicycle(null);
+        user.setUserLocation(dockingStation.getDockingStationLocation());
+        if (dockingStation.getStationType() == "plus"){
+            user.setTimeCreditEarned(user.getTimeCreditEarned() + 5);
+            user.setUserTimeCreditBalance(user.getUserTimeCreditBalance() + 5);
+        }
+        user.addToTotalCharges(costOfTheRide);
+        user.setNumberOfRides(user.getNumberOfRides() + 1);
+        user.setTotalRentTime(user.getTotalRentTime() + rentTime);
+        user.getListOfUsedBicycleIds().add(bicycle.getBicycleId());
+        user.setRentDateTime(null);
+        user.setParkDateTime(null);
+
+        System.out.println("Bicycle parked successfully.");
+    }
+
+    private int calculateDuration(User user) {
         Duration duration = Duration.between(user.getRentDateTime(), user.getParkDateTime());
         int minutes = (int) (duration.toMinutes() % 60 * 100_000_000);
         return minutes;
