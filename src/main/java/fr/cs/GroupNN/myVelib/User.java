@@ -2,6 +2,7 @@ package fr.cs.GroupNN.myVelib;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class User {
     private static int counter;
@@ -156,12 +157,27 @@ public class User {
         this.setTotalCharges(newTotalCharges);
     }
 
-    
+
 
     @Override
-    public String toString(){
-        String s = "Id=" + userId + "; Name=" + name + "; Location=" + userLocation;
-        return s;
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", userLocation=" + Arrays.toString(userLocation) +
+                ", userTimeCreditBalance=" + userTimeCreditBalance +
+                ", totalCharges=" + totalCharges +
+                ", registrationCard=" + registrationCard +
+                ", creditCardNumber='" + creditCardNumber + '\'' +
+                ", numberOfRides=" + numberOfRides +
+                ", totalRentTime=" + totalRentTime +
+                ", timeCreditEarned=" + timeCreditEarned +
+                ", rentedBicycle=" + rentedBicycle +
+                ", rentDateTime=" + rentDateTime +
+                ", parkDateTime=" + parkDateTime +
+                ", listOfUsedBicycleIds=" + listOfUsedBicycleIds +
+                '}';
     }
+
 
 }
