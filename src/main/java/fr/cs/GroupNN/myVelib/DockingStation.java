@@ -6,7 +6,7 @@ public class DockingStation {
     private static int counter;
     private int id;
     private double[] dockingStationLocation;
-    private String stationType;
+    private String stationType; // "Standard" or "Plus"
     private ParkingSlot[] slots;
     private Terminal terminal;
     private boolean onService;

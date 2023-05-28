@@ -51,12 +51,7 @@ public class Terminal implements BicycleVisitor {
             } else if (registrationType.equals("VMAX")) {
                 int durationExcess = Math.max(duration - freeHour, 0);
 
-                if (duration >= 60) {
-                    cost = 1 + (durationExcess / 60.0) * hourlyRate;
-                } else if (duration < 60) {
-                    cost = (duration * hourlyRate) / 60.0;
-                }
-
+                cost = durationExcess / 60;
                 timeCredit = Math.max(timeCredit - durationExcess, 0);
                 user.setUserTimeCreditBalance(timeCredit);
             } else {
