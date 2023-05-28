@@ -1,5 +1,6 @@
 package fr.cs.GroupNN.myVelib;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -90,6 +91,12 @@ public class Terminal implements BicycleVisitor {
         user.getListOfUsedBicycleIds().add(rentedBicycle.getBicycleId());
 
         System.out.println("Bicycle rented successfully.");
+    }
+
+    public int calculateDuration(User user) {
+        Duration duration = Duration.between(user.getRentDateTime(), user.getParkDateTime());
+        int minutes = (int) (duration.toMinutes() % 60 * 100_000_000);
+        return minutes;
     }
 
 

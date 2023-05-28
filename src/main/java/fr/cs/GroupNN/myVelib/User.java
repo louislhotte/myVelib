@@ -134,6 +134,14 @@ public class User {
         this.rentDateTime = rentDateTime;
     }
 
+    public LocalDateTime getParkDateTime() {
+        return parkDateTime;
+    }
+
+    public void setParkDateTime(LocalDateTime parkDateTime) {
+        this.parkDateTime = parkDateTime;
+    }
+
     public ArrayList<Integer> getListOfUsedBicycleIds() {
         return listOfUsedBicycleIds;
     }
@@ -153,4 +161,5 @@ public class User {
         String s = "Id=" + userId + "; Name=" + name + "; Location=" + userLocation;
         return s;
     }
+
 }
