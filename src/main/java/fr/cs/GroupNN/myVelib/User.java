@@ -156,6 +156,8 @@ public class User {
         this.setTotalCharges(newTotalCharges);
     }
 
+    
+
     @Override
     public String toString(){
         String s = "Id=" + userId + "; Name=" + name + "; Location=" + userLocation;

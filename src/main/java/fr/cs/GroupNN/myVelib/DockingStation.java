@@ -138,12 +138,36 @@ public class DockingStation {
         return rentedBicycle;
     }
 
-    public void parkBike(){
-        // TO COMPLETE
-        //.....................................................
+    public void parkBike(Bicycle bicycle){
+        boolean freeParkInDockingStation = false;
+        ParkingSlot selectedParkingSlot = null;
+
+        for(ParkingSlot parkingSlot: slots){
+            if (parkingSlot.isOutOfOrder())
+                continue;
+            if (parkingSlot.isFree()){
+                freeParkInDockingStation = true;
+                selectedParkingSlot = parkingSlot;
+                break;
+            }
+        }
+
+        if (!freeParkInDockingStation) {
+            System.out.println("No available slots to park in this docking station.");
+            return;
+        }
+
+        // selectedParkingSlot ...............................................................
+
+        // Remove the bike from the slots
+        selectedParkingSlot.setBicycle(bicycle);
+
+        // Occupy the parking slot with the rented bike
+        selectedParkingSlot.setFree(false);
+
+        System.out.println("Bike parked successfully.");
 
         dropping++;
-        return;
     }
 
     private ParkingSlot findOccupiedParkingSlot() {
