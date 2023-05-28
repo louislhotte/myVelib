@@ -5,18 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Terminal implements BicycleVisitor {
-    private int duration;
-    private Bicycle bicycle;
-    private User user;
+    private Planner planner;
 
-    public Terminal(int duration, Bicycle bicycle, User user) {
-        this.duration = duration;
-        this.bicycle = bicycle;
-        this.user = user;
+    public Terminal() {
+        super();
     }
-
-
-
 
     public boolean isParkedInDockStation() {
         double[] bicycleLocation = bicycle.getBicycleLocation();
@@ -43,7 +36,7 @@ public class Terminal implements BicycleVisitor {
     }
 
 
-    public double calculateCost() {
+    public double calculateCost(User user, double duration) {
         double cost = 0;
         if (user != null && user.getRegistrationCard() != null) {
             String registrationType = user.getRegistrationCard().getRegistrationType();

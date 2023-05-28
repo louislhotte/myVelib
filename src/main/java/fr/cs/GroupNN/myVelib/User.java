@@ -17,6 +17,7 @@ public class User {
     private int timeCreditEarned;
     private Bicycle rentedBicycle;
     private LocalDateTime rentDateTime;
+    private LocalDateTime parkDateTime;
     private ArrayList<Integer> listOfUsedBicycleIds;
 
     public User(String name, double[] userLocation, Cards registrationCard, String creditCardNumber) {
@@ -35,6 +36,7 @@ public class User {
         this.rentedBicycle = null;
         this.rentDateTime = null;
         this.listOfUsedBicycleIds = null;
+        this.parkDateTime = null;
     }
     public String getName() {
         return name;
