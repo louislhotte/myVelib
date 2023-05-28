@@ -85,9 +85,6 @@ public class Terminal implements BicycleVisitor {
         return cost;
     }
 
-
-
-
     public void rentBicycle(DockingStation dockingStation, User user) {
         if (user.getRentedBicycle() != null) {
             System.out.println("User already has a rented bicycle. Cannot rent another one.");
@@ -114,4 +111,6 @@ public class Terminal implements BicycleVisitor {
 
         System.out.println("Bicycle rented successfully.");
     }
+
+
 }

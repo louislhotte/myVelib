@@ -3,6 +3,7 @@ package fr.cs.GroupNN.myVelib;
 import java.util.*;
 
 public class DockingStation {
+    private static int counter;
     private int id;
     private double[] dockingStationLocation;
     private String stationType;
@@ -13,9 +14,10 @@ public class DockingStation {
     private int renting;
     private int dropping;
 
-    public DockingStation(int id, double[] dockingStationLocation, String stationType, ParkingSlot[] slots, Terminal terminal) {
+    public DockingStation(double[] dockingStationLocation, String stationType, ParkingSlot[] slots, Terminal terminal) {
         super();
-        this.id = id;
+        counter++;
+        this.id = counter;
         this.dockingStationLocation = dockingStationLocation;
         this.stationType = stationType;
         this.slots = slots;
