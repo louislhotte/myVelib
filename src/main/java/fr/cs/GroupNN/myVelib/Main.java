@@ -33,7 +33,7 @@ public class Main {
         double[] endLocation = { 5.0, 5.0 };
 
         // Create a planner
-        Planner planner = new Planner(startLocation, endLocation, new Normal());
+        Planner planner = new Planner(startLocation, endLocation, "mechanical", new Normal());
 
         // Use the planner as needed
         double[][] itinerary = planner.optimalItinerary();
