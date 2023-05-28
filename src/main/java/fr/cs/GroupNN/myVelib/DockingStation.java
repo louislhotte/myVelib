@@ -101,7 +101,7 @@ public class DockingStation {
 
         for(ParkingSlot parkingSlot: slots){
             if (!parkingSlot.isOutOfOrder()){
-                if (parkingSlot.isOccupied()){
+                if (!parkingSlot.isFree()){
                     bikeInDockingStation = true;
                     selectedParkingSlot = parkingSlot;
                     break;
@@ -126,7 +126,6 @@ public class DockingStation {
         selectedParkingSlot.setBicycle(null);
 
         // Occupy the parking slot with the rented bike
-        selectedParkingSlot.setOccupied(false);
         selectedParkingSlot.setFree(true);
 
 //        freeParkingSlot.setBicycle(rentedBicycle);

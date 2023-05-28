@@ -1,19 +1,19 @@
 package fr.cs.GroupNN.myVelib;
 
 public class ParkingSlot {
+    private static int counter;
     private int ParkingSlotId;
     private Bicycle bicycle;
     private boolean free;
     private boolean outOfOrder;
-    private boolean occupied;
 
-    public ParkingSlot(int parkingSlotId, Bicycle bicycle, boolean free, boolean outOfOrder, boolean occupied) {
+    public ParkingSlot(Bicycle bicycle, boolean free, boolean outOfOrder) {
         super();
-        ParkingSlotId = parkingSlotId;
+        counter++;
+        ParkingSlotId = counter;
         this.bicycle = bicycle;
         this.free = free;
         this.outOfOrder = outOfOrder;
-        this.occupied = occupied;
     }
 
 
@@ -49,13 +49,5 @@ public class ParkingSlot {
 
     public void setOutOfOrder(boolean outOfOrder) {
         this.outOfOrder = outOfOrder;
-    }
-
-    public boolean isOccupied() {
-        return occupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
     }
 }
