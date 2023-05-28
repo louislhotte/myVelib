@@ -4,14 +4,16 @@ import javax.print.Doc;
 import java.util.*;
 
 public abstract class Bicycle {
+    private static int counter;
     private int bicycleId;
     private double[] bicycleLocation;
     private String bicycleType;
     private static ArrayList<Bicycle> streetBicycles = new ArrayList<Bicycle>();
 
-    public Bicycle(int bicycleId, double[] bicycleLocation, String bicycleType) {
+    public Bicycle(double[] bicycleLocation, String bicycleType) {
         super();
-        this.bicycleId = bicycleId;
+        counter++;
+        this.bicycleId = counter;
         this.bicycleLocation = bicycleLocation;
         this.bicycleType = bicycleType;
         boolean inDockingStation = false;

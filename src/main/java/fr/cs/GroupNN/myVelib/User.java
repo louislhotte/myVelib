@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class User {
+    private static int counter;
     private String name;
-    private int UserId;
+    private int userId;
     private double[] userLocation;
-    private int UserTimeCreditBalance;
+    private int userTimeCreditBalance;
     private double totalCharges;
     private Cards registrationCard;
     private String creditCardNumber;
@@ -18,22 +19,23 @@ public class User {
     private LocalDateTime rentDateTime;
     private ArrayList<Integer> listOfUsedBicycleIds;
 
-    public User(String name, int userId, double[] userLocation, int userTimeCreditBalance, double totalCharges, Cards registrationCard, String creditCardNumber, int numberOfRides, int totalRentTime, int timeCreditEarned, Bicycle rentedBicycle, LocalDateTime rentDateTime, ArrayList<Integer> listOfUsedBicycleIds) {
+    public User(String name, double[] userLocation, Cards registrationCard, String creditCardNumber) {
+        super();
         this.name = name;
-        UserId = userId;
+        counter++;
+        userId = counter;
         this.userLocation = userLocation;
-        UserTimeCreditBalance = userTimeCreditBalance;
-        this.totalCharges = totalCharges;
+        userTimeCreditBalance = 0;
+        this.totalCharges = 0;
         this.registrationCard = registrationCard;
         this.creditCardNumber = creditCardNumber;
-        this.numberOfRides = numberOfRides;
-        this.totalRentTime = totalRentTime;
-        this.timeCreditEarned = timeCreditEarned;
-        this.rentedBicycle = rentedBicycle;
-        this.rentDateTime = rentDateTime;
-        this.listOfUsedBicycleIds = listOfUsedBicycleIds;
+        this.numberOfRides = 0;
+        this.totalRentTime = 0;
+        this.timeCreditEarned = 0;
+        this.rentedBicycle = null;
+        this.rentDateTime = null;
+        this.listOfUsedBicycleIds = null;
     }
-
     public String getName() {
         return name;
     }
@@ -43,11 +45,11 @@ public class User {
     }
 
     public int getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(int userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public double[] getUserLocation() {
@@ -59,11 +61,11 @@ public class User {
     }
 
     public int getUserTimeCreditBalance() {
-        return UserTimeCreditBalance;
+        return userTimeCreditBalance;
     }
 
     public void setUserTimeCreditBalance(int userTimeCreditBalance) {
-        UserTimeCreditBalance = userTimeCreditBalance;
+        this.userTimeCreditBalance = userTimeCreditBalance;
     }
 
     public double getTotalCharges() {
@@ -142,5 +144,11 @@ public class User {
         double currentTotalCharges = this.getTotalCharges();
         double newTotalCharges = currentTotalCharges + charges;
         this.setTotalCharges(newTotalCharges);
+    }
+
+    @Override
+    public String toString(){
+        String s = "Id=" + userId + "; Name=" + name + "; Location=" + userLocation;
+        return s;
     }
 }

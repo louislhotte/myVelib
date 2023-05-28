@@ -16,8 +16,8 @@ class TerminalTest {
 
     @BeforeEach
     void setUp() {
-        mechanicalBicycle = new MechanicalBicycle(1, new double[]{0.0, 0.0}, "mechanical");
-        electricalBicycle = new ElectricalBicycle(1, new double[]{0.0, 0.0}, "electrical");
+        mechanicalBicycle = new MechanicalBicycle(new double[]{0.0, 0.0}, "mechanical");
+        electricalBicycle = new ElectricalBicycle(new double[]{0.0, 0.0}, "electrical");
         user = new User("Louis Lhotte", 1, new double[]{0.0, 0.0}, 20, 0, new Cards("VLIBRE"), "", 0, 0, 20, null, null, new ArrayList<>());
         terminal = new Terminal(0, mechanicalBicycle, user);
     }

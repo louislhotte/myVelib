@@ -3,8 +3,8 @@ package fr.cs.GroupNN.myVelib;
 public class ElectricalBicycle extends Bicycle {
     private double hourlyRate;
 
-    public ElectricalBicycle(int bicycleId, double[] bicycleLocation, String bicycleType) {
-        super(bicycleId, bicycleLocation, "Electrical");
+    public ElectricalBicycle(double[] bicycleLocation, String bicycleType) {
+        super(bicycleLocation, "Electrical");
         this.hourlyRate = 2.0;
     }
 
