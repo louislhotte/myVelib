@@ -11,20 +11,6 @@ public class Terminal implements BicycleVisitor {
         super();
     }
 
-    public boolean isParkedInDockStation() {
-        double[] bicycleLocation = bicycle.getBicycleLocation();
-        List<DockingStation> dockingStations = DockingStation.getDockingStations();
-
-        for (DockingStation dockingStation : dockingStations) {
-            double[] dockingStationLocation = dockingStation.getDockingStationLocation();
-            if (Arrays.equals(bicycleLocation, dockingStationLocation)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     @Override
     public void visit(MechanicalBicycle bicycle) {
         double hourlyRate = bicycle.getHourlyRate();
@@ -36,7 +22,8 @@ public class Terminal implements BicycleVisitor {
     }
 
 
-    public double calculateCost(User user, double duration) {
+    public double calculateCost(User user, int duration) {
+        Bicycle bicycle = user.getRentedBicycle();
         double cost = 0;
         if (user != null && user.getRegistrationCard() != null) {
             String registrationType = user.getRegistrationCard().getRegistrationType();

@@ -18,7 +18,8 @@ class TerminalTest {
     void setUp() {
         mechanicalBicycle = new MechanicalBicycle(new double[]{0.0, 0.0}, "mechanical");
         electricalBicycle = new ElectricalBicycle(new double[]{0.0, 0.0}, "electrical");
-        user = new User("Louis Lhotte", 1, new double[]{0.0, 0.0}, 20, 0, new Cards("VLIBRE"), "", 0, 0, 20, null, null, new ArrayList<>());
+        user = new User("Louis Lhotte", new double[]{0.0, 0.0}, new Cards("VLIBRE"), "");
+        user.setUserTimeCreditBalance(20);
         terminal = new Terminal(0, mechanicalBicycle, user);
     }
 
