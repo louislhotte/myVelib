@@ -47,7 +47,7 @@ public class Main {
             System.out.println("No optimal itinerary found.");
         }
 
-        DockingStation dockingStationStart = getDockingStationFromLocation
+        DockingStation dockingStationStart = getDockingStationFromLocation;
 
 
     }
