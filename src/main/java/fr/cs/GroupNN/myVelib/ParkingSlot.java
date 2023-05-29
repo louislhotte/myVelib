@@ -11,8 +11,8 @@ public class ParkingSlot {
         super();
         counter++;
         ParkingSlotId = counter;
-        this.bicycle = bicycle;
         this.free = free;
+        this.setBicycle(bicycle);
         this.outOfOrder = outOfOrder;
     }
 
