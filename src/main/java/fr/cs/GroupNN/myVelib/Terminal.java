@@ -28,10 +28,10 @@ public class Terminal implements BicycleVisitor {
         double cost = 0;
         if (user != null && user.getRegistrationCard() != null) {
             String registrationType = user.getRegistrationCard().getRegistrationType();
-            int timeCredit = user.getTimeCreditEarned();
+            int timeCredit = user.getUserTimeCreditBalance();
             int freeHour = 60;
-
             double hourlyRate;
+
             if (bicycle instanceof MechanicalBicycle) {
                 hourlyRate = ((MechanicalBicycle) bicycle).getHourlyRate();
             } else if (bicycle instanceof ElectricalBicycle) {
@@ -48,13 +48,18 @@ public class Terminal implements BicycleVisitor {
 
                 timeCredit = Math.max(timeCredit - durationExcess, 0);
                 user.setUserTimeCreditBalance(timeCredit);
-            } else if (registrationType.equals("VMAX")) {
+            }
+            else if (registrationType.equals("VMAX")) {
                 int durationExcess = Math.max(duration - freeHour, 0);
+                int effectiveDuration = Math.max(durationExcess - timeCredit, 0);
 
-                cost = durationExcess / 60;
+                cost = (effectiveDuration / 60.0) * 1;
+
                 timeCredit = Math.max(timeCredit - durationExcess, 0);
                 user.setUserTimeCreditBalance(timeCredit);
-            } else {
+            }
+
+            else {
                 cost = (duration * hourlyRate) / 60.0;
             }
         }
