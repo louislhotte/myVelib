@@ -22,7 +22,7 @@ public class DockingStation {
         this.stationType = stationType;
         this.slots = slots;
         this.terminal = terminal;
-        this.onService = false;
+        this.onService = true;
         this.renting = 0;
         this.dropping = 0;
         dockingStations.add(this);
