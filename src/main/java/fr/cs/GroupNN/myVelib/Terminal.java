@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Terminal implements BicycleVisitor {
-    private Planner planner;
 
     public Terminal() {
         super();
@@ -136,6 +135,4 @@ public class Terminal implements BicycleVisitor {
         int minutes = (int) (duration.toMinutes() % 60 * 100_000_000);
         return minutes;
     }
-
-
 }
