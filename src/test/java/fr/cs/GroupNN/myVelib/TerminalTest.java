@@ -21,8 +21,8 @@ class TerminalTest {
         String creditCardNumber = "4268 8465 2564 4566";
         user = new User("Louis Lhotte", userLocation, registrationCard, creditCardNumber);
 
-        mechanicalBicycle = new MechanicalBicycle(new double[] {0.0, 0.0}, "Mechanical");
-        electricalBicycle = new ElectricalBicycle(new double[] {0.0, 0.0}, "Electrical");
+        mechanicalBicycle = new MechanicalBicycle(new double[] {0.0, 0.0});
+        electricalBicycle = new ElectricalBicycle(new double[] {0.0, 0.0});
 
         ParkingSlot parkingSlot1 = new ParkingSlot(null, true, false);
         ParkingSlot parkingSlot2 = new ParkingSlot(null, true, false);

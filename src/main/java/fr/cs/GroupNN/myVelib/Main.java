@@ -10,8 +10,8 @@ public class Main {
         // Bicycles
         double[] bicycleLocation1 = { 1.0, 2.0 };
         double[] bicycleLocation2 = { 3.0, 4.0 };
-        Bicycle bicycle1 = new MechanicalBicycle(bicycleLocation1, "electrical");
-        Bicycle bicycle2 = new ElectricalBicycle(bicycleLocation2, "mechanical");
+        Bicycle bicycle1 = new MechanicalBicycle(bicycleLocation1);
+        Bicycle bicycle2 = new ElectricalBicycle(bicycleLocation2);
 
         // Create parking slots
         ParkingSlot parkingSlot1 = new ParkingSlot(bicycle1, false, false);

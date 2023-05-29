@@ -21,6 +21,25 @@ public class User {
     private LocalDateTime parkDateTime;
     private ArrayList<Integer> listOfUsedBicycleIds;
 
+    public User(String name, double[] userLocation, String creditCardNumber) {
+        super();
+        this.name = name;
+        counter++;
+        userId = counter;
+        this.userLocation = userLocation;
+        userTimeCreditBalance = 0;
+        this.totalCharges = 0;
+        this.registrationCard = null;
+        this.creditCardNumber = creditCardNumber;
+        this.numberOfRides = 0;
+        this.totalRentTime = 0;
+        this.timeCreditEarned = 0;
+        this.rentedBicycle = null;
+        this.rentDateTime = null;
+        this.listOfUsedBicycleIds = null;
+        this.parkDateTime = null;
+    }
+
     public User(String name, double[] userLocation, Cards registrationCard, String creditCardNumber) {
         super();
         this.name = name;
