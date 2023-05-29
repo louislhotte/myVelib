@@ -102,6 +102,15 @@ class Normal implements PlanningPolicy {
         bicycleType: String): double[][]
     }
 
+interface BicycleVisitor {
+        + visit(bicycle: MechanicalBicycle): void
+        + visit(bicycle: ElectricalBicycle): void
+    }
+
+interface SortingPolicy {
++sortDockingStations()
+}
+
 
 Planner --> PlanningPolicy
 DockingStation --> ParkingSlot
