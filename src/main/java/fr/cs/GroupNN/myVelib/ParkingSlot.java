@@ -32,6 +32,8 @@ public class ParkingSlot {
     }
 
     public void setBicycle(Bicycle bicycle) {
+        if (bicycle == null)
+            this.free = true;
         this.bicycle = bicycle;
     }
 
