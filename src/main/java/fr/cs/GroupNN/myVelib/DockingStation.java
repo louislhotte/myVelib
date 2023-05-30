@@ -218,7 +218,7 @@ public class DockingStation {
         return freeSlotsNumber;
     }
 
-    private static boolean equalLocation(double[] point1, double[] point2){
+    public static boolean equalLocation(double[] point1, double[] point2){
         if(point1[0] == point2[0] && point1[1] == point2[1])
             return true;
         return false;

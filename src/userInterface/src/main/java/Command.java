@@ -2,6 +2,7 @@ package main.java;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import fr.cs.GroupNN.myVelib.*;
@@ -56,16 +57,17 @@ public class Command {
                 return "";
             case "setup":
                 if (arguments.size() == 0){
-                    setup(10, 10, 4000.0, 75);
+                    setup("defaultName" ,10, 10, 4000.0, 75);
                     return "Successfully set up the default myVelib network.";
                 }
                 else if (arguments.size() == 4) {
-                    int nStations = Integer.parseInt(arguments.get(0));
-                    int nSlots = Integer.parseInt(arguments.get(1));
-                    double s =Double.parseDouble(arguments.get(2));
-                    double nBikes = Double.parseDouble(arguments.get(3));
+                    String name = arguments.get(0);
+                    int nStations = Integer.parseInt(arguments.get(1));
+                    int nSlots = Integer.parseInt(arguments.get(2));
+                    double s =Double.parseDouble(arguments.get(3));
+                    double nBikes = Double.parseDouble(arguments.get(4));
 
-                    setup(nStations, nSlots, s, nBikes);
+                    setup(name, nStations, nSlots, s, nBikes);
                     return "Successfully set up the velibNetwork with " + nStations + " Stations " + nSlots + "Slots" + "of squared area with side length " + s + "and initially populated with" + nBikes + "bikes";
                 }
                 break;
@@ -169,17 +171,70 @@ public class Command {
         }
     }
 
-    public void setup(int nStations, int nSlots, double s, double nBikes) {
-        ArrayList<ParkingSlot> parkingSlots= new ArrayList<>();
+    public void setup(String velibNetworkName, int nStations, int nSlots, double s, double nBikes) {
+        MyVelib myvelib = new MyVelib(velibNetworkName);
+        MyVelib.addMyVelib(myvelib);
+        ArrayList<double[]> locations = new ArrayList<double[]>();
+
+        ParkingSlot[] slots;
+        HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
+        hashMap.put(0, "Standard");
+        hashMap.put(1, "Plus");
 
         for (int i = 0; i < nStations; i++) {
+            slots = new ParkingSlot[nSlots];
+            // square map of size s
             double[] location = {Math.random() * s, Math.random() * s};
-            ParkingSlot[] slots = {};
-            DockingStation station = new DockingStation(location, "Standard", slots, new Terminal());
+            locations.add(location);
 
+            int type = (int) (Math.random()*2);
+            DockingStation station = null;
+
+            // creating the parking slots
             for (int j = 0; j < nSlots; j++) {
                 ParkingSlot parkingSlot = new ParkingSlot(null, true, false);
+                slots[j] = parkingSlot;
             }
+            station = new DockingStation(location, hashMap.get(type), slots, new Terminal());
+            myvelib.addDockingStation(station);
+        }
+
+        int counter = 0;
+        while (counter < nBikes){
+            int index = (int) (Math.random()*(nBikes - counter));
+            double[] location = locations.get(index);
+
+            int isElectrical = (int) (Math.random() * 2);
+            Bicycle bicycle = null;
+            if (isElectrical == 1) {
+                bicycle = new ElectricalBicycle(location);
+            } else {
+                bicycle = new MechanicalBicycle(location);
+            }
+
+            ArrayList<DockingStation> dockingStations = myvelib.getDockingStationsList();
+
+            DockingStation locatedDockingStation = null;
+            for (DockingStation dockingStation: dockingStations){
+                double[] currentDockingStationLocation = dockingStation.getDockingStationLocation();
+                if(DockingStation.equalLocation(currentDockingStationLocation, location)) {
+                    locatedDockingStation = dockingStation;
+                    break;
+                }
+            }
+            ParkingSlot[] parkingSlots = locatedDockingStation.getSlots();
+            for (ParkingSlot parkingSlot: parkingSlots) {
+                if (!parkingSlot.isOutOfOrder()){
+                    if (parkingSlot.isFree()){
+                        parkingSlot.setBicycle(bicycle);
+                        parkingSlot.setFree(false);
+                        locations.remove(index);
+                        counter++;
+                        break;
+                    }
+                }
+            }
+
         }
 
     }
