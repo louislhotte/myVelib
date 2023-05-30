@@ -23,7 +23,7 @@ public class PreferPlus extends Normal {
 
         for(DockingStation dockingStation: dockingStations){
             double[] currentDockingStationLocation = dockingStation.getDockingStationLocation();
-            if (dockingStation.getStationType().toLowerCase() == "plus" && dockingStation.oneBike(bicycleType) && distance(currentDockingStationLocation, endLocation) < distanceToNearestToEndStation * (double)(1 + (RATE/100.0)) ){
+            if (dockingStation.getStationType().toLowerCase() == "plus" && dockingStation.oneFree() && distance(currentDockingStationLocation, endLocation) < distanceToNearestToEndStation * (double)(1 + (RATE/100.0)) ){
                 nearestToEndLocation = currentDockingStationLocation;
                 nearestToEnd = dockingStation;
             }

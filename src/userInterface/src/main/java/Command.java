@@ -74,7 +74,9 @@ public class Command {
                     String name = arguments.get(0);
                     String cardType = arguments.get(1);
                     String velibNetwork = arguments.get(2);
+
                     addUser(name, cardType, velibNetwork);
+
                     return "Successfully set up the default myVelib network.";
                 }
             case "exit":
