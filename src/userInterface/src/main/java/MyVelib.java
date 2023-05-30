@@ -19,6 +19,18 @@ public class MyVelib {
         this.setName(name);
     }
 
+    public User getUserByID(int userID) {
+        for (User user: users) {
+            if (user.getUserId() == userID) {
+                return user;
+            }
+            else {
+                return null;
+            }
+        }
+        return null;
+    }
+
     // getters
     public String getName() {
         return name;

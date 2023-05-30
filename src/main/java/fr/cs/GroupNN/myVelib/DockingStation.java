@@ -28,6 +28,18 @@ public class DockingStation {
         dockingStations.add(this);
     }
 
+    public static DockingStation getDockingStationByID(int stationID) {
+        for (DockingStation dockingStation: dockingStations) {
+            if (dockingStation.getId() == stationID) {
+                return dockingStation;
+            }
+            else {
+                return null;
+            }
+        }
+        return null;
+    }
+
 
     // Getters and setters for private fields
     public int getId() {
@@ -239,4 +251,19 @@ public class DockingStation {
     public static ArrayList<DockingStation> getDockingStations(){
         return dockingStations;
     }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Docking Station ID: ").append(id).append("\n");
+        sb.append("Location: ").append(Arrays.toString(dockingStationLocation)).append("\n");
+        sb.append("Station Type: ").append(stationType).append("\n");
+        sb.append("Number of Slots: ").append(slots.length).append("\n");
+        sb.append("Terminal: ").append(terminal).append("\n");
+        sb.append("On Service: ").append(onService).append("\n");
+        sb.append("Renting Count: ").append(renting).append("\n");
+        sb.append("Dropping Count: ").append(dropping).append("\n");
+
+        return sb.toString();
+    }
+
 }
