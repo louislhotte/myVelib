@@ -28,9 +28,6 @@ public class DockingStation {
         dockingStations.add(this);
     }
 
-    public void earnCredit() {
-        // Implement the functionality to earn credit for the docking station here
-    }
 
     // Getters and setters for private fields
     public int getId() {

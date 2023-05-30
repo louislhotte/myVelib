@@ -18,9 +18,11 @@ public abstract class Bicycle {
         this.bicycleType = bicycleType;
         boolean inDockingStation = false;
         List<DockingStation> dockingStations = DockingStation.getDockingStations();
+        System.out.println("BICYCLE");
         for(DockingStation dockingStation: dockingStations){
-            if (equals(bicycleLocation,dockingStation.getDockingStationLocation()))
+            if (Bicycle.equalsLocations(bicycleLocation,dockingStation.getDockingStationLocation())) {
                 inDockingStation = true;
+            }
         }
         if (!inDockingStation)
             streetBicycles.add(this);
@@ -50,7 +52,7 @@ public abstract class Bicycle {
         this.bicycleType = bicycleType;
     }
 
-    private static boolean equals(double[] x, double[] y) {
+    public static boolean equalsLocations(double[] x, double[] y) {
         if (x[0] == y[0] && x[1] == y[1]) {
             return true;
         }
