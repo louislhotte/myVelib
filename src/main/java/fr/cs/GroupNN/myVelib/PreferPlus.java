@@ -7,12 +7,12 @@ public class PreferPlus extends Normal {
     public double[][] optimalItinerary(double[] startLocation,double[] endLocation, String bicycleType){
         ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();
 
-        DockingStation nearestToStart = null;
-        DockingStation nearestToEnd = null;
-
         double[][] normalOptimal = super.optimalItinerary(startLocation, endLocation, bicycleType);
         double[] nearestToStartLocation = normalOptimal[0] ;
         double[] nearestToEndLocation = normalOptimal[1];
+
+        DockingStation nearestToStart = DockingStation.getDockingStationFromLocation(nearestToStartLocation);
+        DockingStation nearestToEnd = DockingStation.getDockingStationFromLocation(nearestToEndLocation);
 
         double distanceToNearestToEndStation = distance(endLocation, nearestToEndLocation);
 

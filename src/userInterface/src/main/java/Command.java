@@ -1,6 +1,9 @@
 package main.java;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import fr.cs.GroupNN.myVelib.*;
 
 public class Command {
@@ -74,6 +77,20 @@ public class Command {
     }
 
 
+//    addUser <userName,cardType, velibNetworkName> : to add a user with name
+//    userName and card cardType (i.e. ``none'' if the user has no card) to a myVelib network
+//    velibNetworkName
+
+    public void addUser(String userName, String cardType, String velibNetworkName){
+        if (cardType.toLowerCase() == "none"){
+            double first14Digits = (double) (Math.random() * 100_000_000_000_000D);
+            double creditCardNumber = 5200000000000000D + first14Digits;
+            String stringCreditCardNumber
+            double[] location = {0.0, 0.0};
+            User user = new User(userName, location, "0000_0000_0000_0000");
+        }
+    }
+
     public void setup(int nStations, int nSlots, double s, double nBikes) {
         ArrayList<ParkingSlot> parkingSlots= new ArrayList<>();
 
@@ -88,5 +105,4 @@ public class Command {
         }
 
     }
-
 }
