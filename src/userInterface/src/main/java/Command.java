@@ -144,18 +144,19 @@ public class Command {
 //    velibNetworkName
 
     public void addUser(String userName, String cardType, String velibNetworkName){
-        double first14Digits = (double) (Math.random() * 100_000_000_000_000D);
-        double creditCardNumber = 5200000000000000D + first14Digits;
-        String stringCreditCardNumber = Double.toString(creditCardNumber);
+        long first14Digits = (long) (Math.random() * 100_000_000_000_000D);
+        long creditCardNumber = 5200000000000000L + first14Digits;
+        String stringCreditCardNumber = Long.toString(creditCardNumber);
         double[] location = {0.0, 0.0};
         User user = null;
 
-        if (cardType.toLowerCase() == "none"){
-            user = new User(userName, location, stringCreditCardNumber);
-        }
-        else if (cardType.toLowerCase() == "vlibre" || cardType.toLowerCase() == "vmax"){
+        if (cardType.toLowerCase() == "vlibre" || cardType.toLowerCase() == "vmax"){
             Cards card = new Cards(cardType.toUpperCase());
             user = new User(userName, location, card, stringCreditCardNumber);
+        }
+
+        else{
+            user = new User(userName, location, stringCreditCardNumber);
         }
 
         MyVelib velibNetwork = MyVelib.inMyVelibNetworks(velibNetworkName);
