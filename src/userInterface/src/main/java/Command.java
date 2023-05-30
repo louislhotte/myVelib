@@ -125,13 +125,50 @@ public class Command {
             case "exit":
                 return "Exiting the network.";
 
+
             case "rentbike":
-                if (arguments.size() == 3) {
-                    //complete
+                if (arguments.size() == 4) {
+                    int userID = Integer.parseInt(arguments.get(0));
+                    int stationID = Integer.parseInt(arguments.get(1));
+                    String name = arguments.get(2);
+                    String bicycleType = arguments.get(3);
+                    rentBike(userID, stationID, name, bicycleType);
                     return "Bike successfully rented.";
                 }
                 else {
-                    return "Unknown command entered. Type help to display help.";
+                    return "4 arguments expected";
+                }
+            case "displayStation":
+                if (arguments.size() == 2) {
+                    String name = arguments.get(0);
+                    int stationID = Integer.parseInt(arguments.get(1));
+                    displayStation(name, stationID);
+                }
+                else {
+                    return "2 arguments expected.";
+                }
+
+            case "displayUser":
+                if (arguments.size() == 2) {
+                    String name = arguments.get(0);
+                    int userID = Integer.parseInt(arguments.get(1));
+                    displayUser(name, userID);
+                }
+                else {
+                    return "2 arguments expected.";
+                }
+
+            case "returnBike":
+                if (arguments.size() == 4) {
+                    int userID = Integer.parseInt(arguments.get(0));
+                    int stationID = Integer.parseInt(arguments.get(1));
+                    double duration = Double.parseDouble(arguments.get(2));
+                    String name = arguments.get(4);
+                    returnBike(userID, stationID, duration, name);
+                    return "Bike successfully returned to docking station " + stationID;
+                }
+                else {
+                    return "4 arguments expected.";
                 }
 
             default:
@@ -140,7 +177,43 @@ public class Command {
         return "";
     }
 
+    public void returnBike(int userID, int stationID, double duration, String name) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        User user = myvelib.getUserByID(userID);
+        DockingStation dockingStation = DockingStation.getDockingStationByID(stationID);
+        if (dockingStation.oneFree()) {
+            dockingStation.getTerminal().parkBicycle(dockingStation, user);
+        }
+        else {
+            System.out.println("Park not successfully parked due to no free spots.");
+            return;
+        }
+    }
 
+    public String displayUser(String name, int userID) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        User user = myvelib.getUserByID(userID);
+        return user.toString();
+    }
+
+
+    public String displayStation(String name, int stationID) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        DockingStation dockingStation = DockingStation.getDockingStationByID(stationID);
+        return dockingStation.toString();
+    }
+
+
+
+    public void rentBike(int userID,int stationID, String name, String bicycleType) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        User user = myvelib.getUserByID(userID);
+        DockingStation dockingStation = DockingStation.getDockingStationByID(stationID);
+        if (dockingStation.oneBike(bicycleType)) {
+            dockingStation.getTerminal().rentBicycle(dockingStation, user, bicycleType);
+            System.out.println("User " + user.getName() + " picked a " + bicycleType + "at the the docking Station " + stationID);
+        }
+    }
 //    addUser <userName,cardType, velibNetworkName> : to add a user with name
 //    userName and card cardType (i.e. ``none'' if the user has no card) to a myVelib network
 //    velibNetworkName
