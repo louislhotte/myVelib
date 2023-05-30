@@ -60,53 +60,55 @@ public class MyVelibNetwork {
      * Method created to read the commands
      */
     private static void readCommand() throws Exception {
-        Command command = new Command();
+        Command command;
 
         do {
             // Read a command
             command = readFromConsole();
 
-            String STATUS = command.eval();
+            if (command != null) {
+                String STATUS = command.eval();
 
-            // If error statement, print it
-            if (STATUS != "") {
-                System.out.println(STATUS);
+                // If error statement, print it
+                if (!STATUS.isEmpty()) {
+                    System.out.println(STATUS);
+                }
             }
-
-        }
-
-        while(!command.exit());
+        } while (command != null && !command.exit());
     }
+
 
     /**
      * Read command from CLUI
      */
     private static Command readFromConsole() {
         try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-                // Read the command from the console
-                System.out.print("Enter a command: ");
+            System.out.print("Enter a command: ");
 
-                if (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
+            if (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
 
-                    // Parsing
-                    String[] parts = line.split(" ");
-                    ArrayList<String> arguments = new ArrayList<>(Arrays.asList(parts).subList(1, parts.length));
-
-                    Command command = new Command(parts[0], arguments);
-                    return command;
-                } else {
-                    // No input available, exit the loop
-                    break;
+                // Check if the user wants to exit
+                if (line.equalsIgnoreCase("exit")) {
+                    return new Command("exit", new ArrayList<>());
                 }
+
+                // Parsing
+                String[] parts = line.split(" ");
+                ArrayList<String> arguments = new ArrayList<>(Arrays.asList(parts).subList(1, parts.length));
+
+                Command command = new Command(parts[0], arguments);
+                return command;
             }
         } catch (IllegalStateException e) {
             // System.in has been closed
             System.out.println("Error: System input was closed; exiting");
         }
+
         return null;
     }
+
+
 
     private static void exit() {
         System.out.println("You have successfully exited the Velib Network.");
