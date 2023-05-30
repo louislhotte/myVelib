@@ -40,8 +40,7 @@ public class Command {
                         + "addUser <userName, cardType, velibnetworkName>: Add a user with the specified name and card type ('none' if the user has no card) to the myVelib network.\n\n"
                         + "offline <velibnetworkName, stationID>: Put the specified station offline in the myVelib network.\n\n"
                         + "online <velibnetworkName, stationID>: Put the specified station online in the myVelib network.\n\n"
-                        + "rentBike <userID, stationID, bicycleType>: Allow the specified user to rent a bike from the specified station. If no bikes are available, appropriate action is taken.\n\n"
-                        + "rentBike <userID, GPS_Position>: Allow the specified user to rent a bike from a given GPS position.\n\n"
+                        + "rentBike <userID, stationID, bicycleType, name>: Allow the specified user to rent a bike from the specified station. If no bikes are available, appropriate action is taken.\n\n"
                         + "returnBike <userID, stationID, duration>: Allow the specified user to return a bike to the specified station after the given duration. If no parking bay is available, appropriate action is taken. The command also displays the cost of the rent.\n\n"
                         + "displayStation <velibnetworkName, stationID>: Display the statistics of the specified station in the myVelib network.\n\n"
                         + "displayUser <velibnetworkName, userID>: Display the statistics of the specified user in the myVelib network.\n\n"
@@ -153,12 +152,38 @@ public class Command {
                     return "2 arguments expected.";
                 }
 
+            case "returnBike":
+                if (arguments.size() == 4) {
+                    int userID = Integer.parseInt(arguments.get(0));
+                    int stationID = Integer.parseInt(arguments.get(1));
+                    double duration = Double.parseDouble(arguments.get(2));
+                    String name = arguments.get(4);
+                    returnBike(userID, stationID, duration, name);
+                    return "Bike successfully returned to docking station " + stationID;
+                }
+                else {
+                    return "4 arguments expected.";
+                }
+
             default:
                 return "Unknown command entered. Type help to display help.";
         }
         return "";
     }
 
+
+    public void returnBike(int userID, int stationID, double duration, String name) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        User user = myvelib.getUserByID(userID);
+        DockingStation dockingStation = DockingStation.getDockingStationByID(stationID);
+        if (dockingStation.oneFree()) {
+            dockingStation.getTerminal().parkBicycle(dockingStation, user);
+        }
+        else {
+            System.out.println("Park not successfully parked due to no free spots.");
+            return;
+        }
+    }
 
     public String displayUser(String name, int userID) {
         MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
@@ -179,7 +204,7 @@ public class Command {
         MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
         User user = myvelib.getUserByID(userID);
         DockingStation dockingStation = DockingStation.getDockingStationByID(stationID);
-        if (dockingStation.oneFree()) {
+        if (dockingStation.oneBike(bicycleType)) {
             dockingStation.getTerminal().rentBicycle(dockingStation, user, bicycleType);
             System.out.println("User " + user.getName() + " picked a " + bicycleType + "at the the docking Station " + stationID);
         }
