@@ -18,12 +18,13 @@ public class PreferPlus extends Normal {
 
         final double RATE = 10.0;
 
-        if (nearestToEnd.getStationType().toLowerCase() == "plus")
+        if (nearestToEnd.getStationType().toLowerCase().equals("plus"))
             return new double[][]{nearestToStartLocation, nearestToEndLocation};
 
         for(DockingStation dockingStation: dockingStations){
             double[] currentDockingStationLocation = dockingStation.getDockingStationLocation();
-            if (dockingStation.getStationType().toLowerCase() == "plus" && dockingStation.oneFree() && distance(currentDockingStationLocation, endLocation) < distanceToNearestToEndStation * (double)(1 + (RATE/100.0)) ){
+            if (dockingStation.getStationType().toLowerCase().equals("plus") && dockingStation.oneFree() && distance(currentDockingStationLocation, endLocation) < distanceToNearestToEndStation * (double)(1 + (RATE/100.0)) ){
+                System.out.println("yes");
                 nearestToEndLocation = currentDockingStationLocation;
                 nearestToEnd = dockingStation;
             }

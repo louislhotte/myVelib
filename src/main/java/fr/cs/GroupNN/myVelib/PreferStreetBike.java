@@ -22,7 +22,7 @@ public class PreferStreetBike extends Normal {
         nearestToStartLocation = nearestToStart.getBicycleLocation();
 
         for (Bicycle bicycle: streetBicycles) {
-            if (distance(bicycle.getBicycleLocation(), startLocation) < distance(nearestToStartLocation, startLocation) && bicycle.getBicycleType() == bicycleType){
+            if (distance(bicycle.getBicycleLocation(), startLocation) < distance(nearestToStartLocation, startLocation) && bicycle.getBicycleType().equals(bicycleType)){
                 nearestToStart = bicycle;
                 nearestToStartLocation = nearestToStart.getBicycleLocation();
             }

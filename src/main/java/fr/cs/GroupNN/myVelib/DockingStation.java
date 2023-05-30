@@ -185,6 +185,7 @@ public class DockingStation {
 
     public boolean oneBike(String bicycleType){
         boolean atLeastOneBike = false;
+
         for(ParkingSlot parkingSlot: slots){
             if (parkingSlot.isOutOfOrder())
                 continue;

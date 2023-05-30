@@ -20,7 +20,7 @@ public class AvoidPlus implements PlanningPolicy{
                 nearestToStart = dockingStation;
                 nearestToStartLocation = nearestToStart.getDockingStationLocation();
             }
-            if (dockingStation.getStationType().toLowerCase() != "plus" && dockingStation.oneFree() && distance(dockingStation.getDockingStationLocation(), endLocation) < distance(nearestToEndLocation, endLocation)){
+            if (!dockingStation.getStationType().toLowerCase().equals("plus") && dockingStation.oneFree() && distance(dockingStation.getDockingStationLocation(), endLocation) < distance(nearestToEndLocation, endLocation)){
                 nearestToEnd = dockingStation;
                 nearestToEndLocation = nearestToEnd.getDockingStationLocation();
             }

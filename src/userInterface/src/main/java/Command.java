@@ -79,12 +79,16 @@ public class Command {
 
                     return "Successfully set up the default myVelib network.";
                 }
+                else {
+                    return "0 or 4 arguments expected";
+                }
             case "exit":
                 return "Exiting the network.";
 
             default:
                 return "Unknown command entered. Type help to display help.";
         }
+        return "";
     }
 
 
