@@ -101,6 +101,25 @@ public class Command {
                 else{
                     return "2 arguments expected";
                 }
+            case "online":
+                if (arguments.size() == 2){
+                    String velibNetworkName = arguments.get(0);
+                    int stationID = Integer.parseInt(arguments.get(1));
+
+                    int value = online(velibNetworkName, stationID);
+                    if (value == -1){
+                        return "No current MyVelib network with the given name.";
+                    }
+                    else if (value == 0){
+                        return "Station switched on successfully";
+                    }
+                    else{
+                        return "The given Station ID does not match any of the existing docking stations";
+                    }
+                }
+                else{
+                    return "2 arguments expected";
+                }
             case "exit":
                 return "Exiting the network.";
 
@@ -177,6 +196,29 @@ public class Command {
                 if (dockingStation.getId() == stationID){
                     stationIDExists = true;
                     dockingStation.setOnService(false);
+                    break;
+                }
+            }
+            if (!stationIDExists){
+                return 1;
+            }
+            return 0;
+        }
+    }
+
+    public int online(String velibNetworkName, int stationID){
+        MyVelib velibNetwork = MyVelib.inMyVelibNetworks(velibNetworkName);
+
+        if (velibNetwork == null) {
+            return -1;
+        }
+
+        else{
+            boolean stationIDExists = false;
+            for (DockingStation dockingStation: DockingStation.getDockingStations()) {
+                if (dockingStation.getId() == stationID){
+                    stationIDExists = true;
+                    dockingStation.setOnService(true);
                     break;
                 }
             }
