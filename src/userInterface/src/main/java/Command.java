@@ -74,20 +74,19 @@ public class Command {
     }
 
 
-//    public void setup(int nStations, int nSlots, double s, double nBikes) {
-//        ArrayList<ParkingSlot> parkingSlots= new ArrayList<>();
-//
-//        for (int i = 0; i < nStations; i++) {
-//            double[] location = {Math.random() * s, Math.random() * s};
-//            ParkingSlot[] slots = {};
-//            DockingStation station = new DockingStation(location, "Standard", slots, new Terminal());
-//
-//            for (int j = 0; j < nSlots; j++) {
-//                ParkingSlot parkingSlot = new ParkingSlot();
-//                station.addParkingSlot(parkingSlot);
-//            }
-//        }
-//
-//    }
+    public void setup(int nStations, int nSlots, double s, double nBikes) {
+        ArrayList<ParkingSlot> parkingSlots= new ArrayList<>();
+
+        for (int i = 0; i < nStations; i++) {
+            double[] location = {Math.random() * s, Math.random() * s};
+            ParkingSlot[] slots = {};
+            DockingStation station = new DockingStation(location, "Standard", slots, new Terminal());
+
+            for (int j = 0; j < nSlots; j++) {
+                ParkingSlot parkingSlot = new ParkingSlot(null, true, false);
+            }
+        }
+
+    }
 
 }
