@@ -2,17 +2,24 @@ package fr.cs.GroupNN.myVelib;
 
 import java.util.*;
 
-public class PreferStreetBike implements PlanningPolicy{
+public class PreferStreetBike extends Normal implements PlanningPolicy{
     @Override
     public double[][] optimalItinerary(double[] startLocation,double[] endLocation, String bicycleType){
         ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();
         ArrayList<Bicycle> streetBicycles = Bicycle.getStreetBicycles();
+        streetBicycles.trimToSize();
+
+        double[][] normalOptimal = super.optimalItinerary(startLocation, endLocation, bicycleType);
+        double[] nearestToStartLocation = normalOptimal[0] ;
+        double[] nearestToEndLocation = normalOptimal[1];
+
+        if (streetBicycles.size() == 0){
+            return new double[][]{nearestToStartLocation, nearestToEndLocation};
+        }
 
         Bicycle nearestToStart = streetBicycles.get(0);
-        DockingStation nearestToEnd = dockingStations.get(0);
 
-        double[] nearestToStartLocation = nearestToStart.getBicycleLocation();
-        double[] nearestToEndLocation = nearestToEnd.getDockingStationLocation();
+        nearestToStartLocation = nearestToStart.getBicycleLocation();
 
         for (Bicycle bicycle: streetBicycles) {
             if (distance(bicycle.getBicycleLocation(), startLocation) < distance(nearestToStartLocation, startLocation) && bicycle.getBicycleType() == bicycleType){
@@ -21,14 +28,6 @@ public class PreferStreetBike implements PlanningPolicy{
             }
         }
 
-        for(DockingStation dockingStation: dockingStations){
-            if (!dockingStation.isOnService())
-                continue;
-            if (dockingStation.oneFree() && distance(dockingStation.getDockingStationLocation(), endLocation) < distance(nearestToEndLocation, endLocation)){
-                nearestToEnd = dockingStation;
-                nearestToEndLocation = nearestToEnd.getDockingStationLocation();
-            }
-        }
         return new double[][]{nearestToStartLocation, nearestToEndLocation};
     }
 }

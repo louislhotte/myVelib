@@ -8,10 +8,10 @@ public class AvoidPlus implements PlanningPolicy{
         ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();
 
         DockingStation nearestToStart = dockingStations.get(0);
-        DockingStation nearestToEnd = dockingStations.get(0);
+        DockingStation nearestToEnd = null;
 
         double[] nearestToStartLocation = nearestToStart.getDockingStationLocation();
-        double[] nearestToEndLocation = nearestToEnd.getDockingStationLocation();
+        double[] nearestToEndLocation = dockingStations.get(0).getDockingStationLocation();
 
         for(DockingStation dockingStation: dockingStations){
             if (!dockingStation.isOnService())
@@ -25,6 +25,11 @@ public class AvoidPlus implements PlanningPolicy{
                 nearestToEndLocation = nearestToEnd.getDockingStationLocation();
             }
         }
+
+        if (nearestToEnd == null){
+            nearestToEndLocation = endLocation;
+        }
+
         return new double[][]{nearestToStartLocation, nearestToEndLocation};
     }
 }
