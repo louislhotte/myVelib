@@ -77,10 +77,10 @@ public class Command {
 
                     addUser(name, cardType, velibNetwork);
 
-                    return "Successfully set up the default myVelib network.";
+                    return "Successfully added a user";
                 }
                 else {
-                    return "0 or 4 arguments expected";
+                    return "3 arguments expected";
                 }
             case "exit":
                 return "Exiting the network.";
@@ -145,6 +145,10 @@ public class Command {
                 ParkingSlot parkingSlot = new ParkingSlot(null, true, false);
             }
         }
+
+    }
+
+    public void offline(String velibNetworkName, int stationID){
 
     }
 }
