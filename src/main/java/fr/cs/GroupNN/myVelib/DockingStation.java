@@ -28,6 +28,18 @@ public class DockingStation {
         dockingStations.add(this);
     }
 
+    public static DockingStation getDockingStationByID(int stationID) {
+        for (DockingStation dockingStation: dockingStations) {
+            if (dockingStation.getId() == stationID) {
+                return dockingStation;
+            }
+            else {
+                return null;
+            }
+        }
+        return null;
+    }
+
 
     // Getters and setters for private fields
     public int getId() {

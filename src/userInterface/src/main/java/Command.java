@@ -138,6 +138,19 @@ public class Command {
         return "";
     }
 
+    public void rentBike(int userID,int stationID, String name, String bicycleType) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        User user = myvelib.getUserByID(userID);
+        DockingStation dockingStation = DockingStation.getDockingStationByID(stationID);
+        if (dockingStation.oneFree()) {
+            dockingStation.getTerminal().rentBicycle(dockingStation, user, bicycleType);
+            System.out.println("User " + user.getName() + " picked a " + bicycleType + "at the the docking Station " + stationID);
+        }
+    }
+
+
+
+
 
 //    addUser <userName,cardType, velibNetworkName> : to add a user with name
 //    userName and card cardType (i.e. ``none'' if the user has no card) to a myVelib network

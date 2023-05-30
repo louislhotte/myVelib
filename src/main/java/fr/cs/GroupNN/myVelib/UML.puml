@@ -117,9 +117,21 @@ class UniformDistributionBikes extends Normal {
         bicycleType: String): double[][]
 }
 
+interface SortingPolicy {
+}
+
+class LeastOccupiedStation implements SortingPolicy {
++sortDockingStations()
+}
+
+class MostUsedComparator {
++compare()
+}
+
 Planner --> PlanningPolicy
 DockingStation --> ParkingSlot : contains
 DockingStation --> Terminal : contains
 ParkingSlot --> Bicycle : contains
 User --> Cards
+MostUsedComparator --> DockingStation
 @enduml

@@ -1,0 +1,41 @@
+@startuml
+
+package main.java {
+    class MyVelib {
+        -name: String
+        -users: ArrayList<User>
+        -dockingStationsList: ArrayList<DockingStation>
+        +myVelibNetworks: ArrayList<MyVelib>
+        +MyVelib(name: String)
+        +getName(): String
+        +getUsers(): ArrayList<User>
+        +getDockingStationsList(): ArrayList<DockingStation>
+        +getMyVelibNetworks(): ArrayList<MyVelib>
+        +setName(name: String): void
+        +addUser(user: User): void
+        +addDockingStation(dockingStation: DockingStation): void
+        +addMyVelib(myVelib: MyVelib): void
+        +inMyVelibNetworks(velibNetworkName: String): MyVelib
+    }
+
+    class Command {
+        -commandOrder: String
+        -arguments: ArrayList<String>
+        +Command(commandOrder: String, arguments: ArrayList<String>)
+        +Command()
+        +exit(): boolean
+        +eval(): String
+    }
+
+class Console {
+    +EnterCommand(): Command
+    +Output(result: String): void
+}
+
+Command --o Console
+MyVelib --|> Command
+Command --> MyVelib
+
+
+@enduml
+
