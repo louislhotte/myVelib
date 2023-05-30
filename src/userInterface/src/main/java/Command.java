@@ -129,6 +129,7 @@ public class Command {
             System.out.println("No current MyVelib network with the given name. Creating a new network and adding the user...");
             MyVelib myVelib = new MyVelib(velibNetworkName);
             myVelib.addUser(user);
+            MyVelib.addMyVelib(myVelib);
         }
     }
 

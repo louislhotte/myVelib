@@ -50,7 +50,7 @@ public class MyVelib {
         dockingStationsList.add(dockingStation);
     }
 
-    public void addMyVelib(MyVelib myVelib){
+    public static void addMyVelib(MyVelib myVelib){
         myVelibNetworks.add(myVelib);
     }
 
