@@ -42,7 +42,7 @@ public class Command {
                         + "addUser <userName, cardType, velibnetworkName>: Add a user with the specified name and card type ('none' if the user has no card) to the myVelib network.\n\n"
                         + "offline <velibnetworkName, stationID>: Put the specified station offline in the myVelib network.\n\n"
                         + "online <velibnetworkName, stationID>: Put the specified station online in the myVelib network.\n\n"
-                        + "rentBike <userID, stationID>: Allow the specified user to rent a bike from the specified station. If no bikes are available, appropriate action is taken.\n\n"
+                        + "rentBike <userID, stationID, bicycleType>: Allow the specified user to rent a bike from the specified station. If no bikes are available, appropriate action is taken.\n\n"
                         + "rentBike <userID, GPS_Position>: Allow the specified user to rent a bike from a given GPS position.\n\n"
                         + "returnBike <userID, stationID, duration>: Allow the specified user to return a bike to the specified station after the given duration. If no parking bay is available, appropriate action is taken. The command also displays the cost of the rent.\n\n"
                         + "displayStation <velibnetworkName, stationID>: Display the statistics of the specified station in the myVelib network.\n\n"
@@ -84,6 +84,15 @@ public class Command {
                 }
             case "exit":
                 return "Exiting the network.";
+
+            case "rentbike":
+                if (arguments.size() == 3) {
+                    //complete
+                    return "Bike successfully rented.";
+                }
+                else {
+                    return "Unknown command entered. Type help to display help.";
+                }
 
             default:
                 return "Unknown command entered. Type help to display help.";
