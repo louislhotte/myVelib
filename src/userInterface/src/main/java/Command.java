@@ -68,6 +68,15 @@ public class Command {
                     setup(nStations, nSlots, s, nBikes);
                     return "Successfully set up the velibNetwork with " + nStations + " Stations " + nSlots + "Slots" + "of squared area with side length " + s + "and initially populated with" + nBikes + "bikes";
                 }
+                break;
+            case "addUser":
+                if (arguments.size() == 3){
+                    String name = arguments.get(0);
+                    String cardType = arguments.get(1);
+                    String velibNetwork = arguments.get(2);
+                    addUser(name, cardType, velibNetwork);
+                    return "Successfully set up the default myVelib network.";
+                }
             case "exit":
                 return "Exiting the network.";
 
@@ -91,7 +100,8 @@ public class Command {
             User user = new User(userName, location, stringCreditCardNumber);
         }
         else if (cardType.toLowerCase() == "vlibre" || cardType.toLowerCase() == "vmax"){
-            User user = new User(userName, location, stringCreditCardNumber);
+            Cards card = new Cards(cardType.toUpperCase());
+            User user = new User(userName, location, card, stringCreditCardNumber);
         }
     }
 
