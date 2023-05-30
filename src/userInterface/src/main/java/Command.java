@@ -82,6 +82,25 @@ public class Command {
                 else {
                     return "3 arguments expected";
                 }
+            case "offline":
+                if (arguments.size() == 2){
+                    String velibNetworkName = arguments.get(0);
+                    int stationID = Integer.parseInt(arguments.get(1));
+
+                    int value = offline(velibNetworkName, stationID);
+                    if (value == -1){
+                        return "No current MyVelib network with the given name.";
+                    }
+                    else if (value == 0){
+                        return "Station shut down successfully";
+                    }
+                    else{
+                        return "The given Station ID does not match any of the existing docking stations";
+                    }
+                }
+                else{
+                    return "2 arguments expected";
+                }
             case "exit":
                 return "Exiting the network.";
 
@@ -126,10 +145,7 @@ public class Command {
             velibNetwork.addUser(user);
         }
         else{
-            System.out.println("No current MyVelib network with the given name. Creating a new network and adding the user...");
-            MyVelib myVelib = new MyVelib(velibNetworkName);
-            myVelib.addUser(user);
-            MyVelib.addMyVelib(myVelib);
+            System.out.println("No current MyVelib network with the given name.");
         }
     }
 
@@ -148,7 +164,26 @@ public class Command {
 
     }
 
-    public void offline(String velibNetworkName, int stationID){
+    public int offline(String velibNetworkName, int stationID){
+        MyVelib velibNetwork = MyVelib.inMyVelibNetworks(velibNetworkName);
 
+        if (velibNetwork == null) {
+            return -1;
+        }
+
+        else{
+            boolean stationIDExists = false;
+            for (DockingStation dockingStation: DockingStation.getDockingStations()) {
+                if (dockingStation.getId() == stationID){
+                    stationIDExists = true;
+                    dockingStation.setOnService(false);
+                    break;
+                }
+            }
+            if (!stationIDExists){
+                return 1;
+            }
+            return 0;
+        }
     }
 }
