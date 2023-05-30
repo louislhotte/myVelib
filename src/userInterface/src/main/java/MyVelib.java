@@ -20,27 +20,11 @@ public class MyVelib {
         myVelibNetworks.add(this);
     }
 
-    // getters
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
-    public ArrayList<DockingStation> getDockingStationsList() {
-        return dockingStationsList;
-    }
-
     public static ArrayList<MyVelib> getMyVelibNetworks() {
         return myVelibNetworks;
     }
 
-    // setters
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     // adding methods
     public void addUser(User user){
@@ -51,4 +35,27 @@ public class MyVelib {
         dockingStationsList.add(dockingStation);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public ArrayList<DockingStation> getDockingStationsList() {
+        return dockingStationsList;
+    }
+
+    public void setDockingStationsList(ArrayList<DockingStation> dockingStationsList) {
+        this.dockingStationsList = dockingStationsList;
+    }
 }
