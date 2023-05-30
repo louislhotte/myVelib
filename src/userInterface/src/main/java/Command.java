@@ -1,8 +1,6 @@
 package main.java;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import fr.cs.GroupNN.myVelib.*;
 
@@ -135,12 +133,47 @@ public class Command {
                 else {
                     return "4 arguments expected";
                 }
+            case "displayStation":
+                if (arguments.size() == 2) {
+                    String name = arguments.get(0);
+                    int stationID = Integer.parseInt(arguments.get(1));
+                    displayStation(name, stationID);
+                }
+                else {
+                    return "2 arguments expected.";
+                }
+
+            case "displayUser":
+                if (arguments.size() == 2) {
+                    String name = arguments.get(0);
+                    int userID = Integer.parseInt(arguments.get(1));
+                    displayUser(name, userID);
+                }
+                else {
+                    return "2 arguments expected.";
+                }
 
             default:
                 return "Unknown command entered. Type help to display help.";
         }
         return "";
     }
+
+
+    public String displayUser(String name, int userID) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        User user = myvelib.getUserByID(userID);
+        return user.toString();
+    }
+
+
+    public String displayStation(String name, int stationID) {
+        MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
+        DockingStation dockingStation = DockingStation.getDockingStationByID(stationID);
+        return dockingStation.toString();
+    }
+
+
 
     public void rentBike(int userID,int stationID, String name, String bicycleType) {
         MyVelib myvelib = MyVelib.inMyVelibNetworks(name);
