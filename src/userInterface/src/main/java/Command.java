@@ -101,13 +101,25 @@ public class Command {
         double creditCardNumber = 5200000000000000D + first14Digits;
         String stringCreditCardNumber = Double.toString(creditCardNumber);
         double[] location = {0.0, 0.0};
+        User user = null;
 
         if (cardType.toLowerCase() == "none"){
-            User user = new User(userName, location, stringCreditCardNumber);
+            user = new User(userName, location, stringCreditCardNumber);
         }
         else if (cardType.toLowerCase() == "vlibre" || cardType.toLowerCase() == "vmax"){
             Cards card = new Cards(cardType.toUpperCase());
-            User user = new User(userName, location, card, stringCreditCardNumber);
+            user = new User(userName, location, card, stringCreditCardNumber);
+        }
+
+        MyVelib velibNetwork = MyVelib.inMyVelibNetworks(velibNetworkName);
+
+        if (velibNetwork != null){
+            velibNetwork.addUser(user);
+        }
+        else{
+            System.out.println("No current MyVelib network with the given name. Creating a new network and adding the user...");
+            MyVelib myVelib = new MyVelib(velibNetworkName);
+            myVelib.addUser(user);
         }
     }
 

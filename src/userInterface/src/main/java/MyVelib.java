@@ -17,7 +17,6 @@ public class MyVelib {
     public MyVelib(String name){
         super();
         this.setName(name);
-        myVelibNetworks.add(this);
     }
 
     // getters
@@ -51,4 +50,21 @@ public class MyVelib {
         dockingStationsList.add(dockingStation);
     }
 
+    public void addMyVelib(MyVelib myVelib){
+        myVelibNetworks.add(myVelib);
+    }
+
+    public static MyVelib inMyVelibNetworks(String velibNetworkName) {
+        MyVelib velibNetwork = null;
+
+        for (MyVelib myVelib: myVelibNetworks) {
+            String currentNetworkName = myVelib.getName();
+            if (velibNetworkName.equals(currentNetworkName)){
+                velibNetwork = myVelib;
+                break;
+            }
+        }
+
+        return velibNetwork;
+    }
 }
