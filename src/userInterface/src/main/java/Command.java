@@ -82,12 +82,16 @@ public class Command {
 //    velibNetworkName
 
     public void addUser(String userName, String cardType, String velibNetworkName){
+        double first14Digits = (double) (Math.random() * 100_000_000_000_000D);
+        double creditCardNumber = 5200000000000000D + first14Digits;
+        String stringCreditCardNumber = Double.toString(creditCardNumber);
+        double[] location = {0.0, 0.0};
+
         if (cardType.toLowerCase() == "none"){
-            double first14Digits = (double) (Math.random() * 100_000_000_000_000D);
-            double creditCardNumber = 5200000000000000D + first14Digits;
-            String stringCreditCardNumber
-            double[] location = {0.0, 0.0};
-            User user = new User(userName, location, "0000_0000_0000_0000");
+            User user = new User(userName, location, stringCreditCardNumber);
+        }
+        else if (cardType.toLowerCase() == "vlibre" || cardType.toLowerCase() == "vmax"){
+            User user = new User(userName, location, stringCreditCardNumber);
         }
     }
 
