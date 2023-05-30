@@ -2,7 +2,7 @@ package fr.cs.GroupNN.myVelib;
 
 import java.util.*;
 
-public class PreferPlus extends Normal implements PlanningPolicy{
+public class PreferPlus extends Normal {
     @Override
     public double[][] optimalItinerary(double[] startLocation,double[] endLocation, String bicycleType){
         ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();

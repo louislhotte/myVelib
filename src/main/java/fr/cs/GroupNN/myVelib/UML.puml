@@ -53,14 +53,9 @@ class User {
     - creditCardNumber: String
 }
 
-class CreditCard {
-    - number: String
-    - expirationDate: Date
-}
 
-class RegistrationCard {
+class Cards {
     - CardType: String
-    - timeCreditEarned: int
     + getCardType()
 }
 
@@ -83,18 +78,23 @@ interface PlanningPolicy {
         +distance(point1: double[], point2: double[]): double
 }
 
-class PreferPlus implements PlanningPolicy {
+class PreferPlus extends Normal {
         + optimalItinerary(startLocation: double[],
         endLocation: double[],
         bicycleType: String): double[][]
 }
 
-class PreferStreetBike implements PlanningPolicy {
+class PreferStreetBike extends Normal {
         + optimalItinerary(startLocation: double[],
         endLocation: double[],
         bicycleType: String): double[][]
     }
 
+class AvoidPLus implements PlanningPolicy {
++ optimalItinerary(startLocation: double[],
+        endLocation: double[],
+        bicycleType: String): double[][]
+}
 
 class Normal implements PlanningPolicy {
         + optimalItinerary(startLocation: double[],
@@ -111,11 +111,15 @@ interface SortingPolicy {
 +sortDockingStations()
 }
 
+class UniformDistributionBikes extends Normal {
++ optimalItinerary(startLocation: double[],
+        endLocation: double[],
+        bicycleType: String): double[][]
+}
 
 Planner --> PlanningPolicy
-DockingStation --> ParkingSlot
-DockingStation --> Terminal
-ParkingSlot --> Bicycle
-User --> CreditCard
-User --> RegistrationCard
+DockingStation --> ParkingSlot : contains
+DockingStation --> Terminal : contains
+ParkingSlot --> Bicycle : contains
+User --> Cards
 @enduml
