@@ -1,10 +1,9 @@
 package main.java;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
+import fr.cs.Group07.myVelib.*;
 import fr.cs.GroupNN.myVelib.*;
 
 public class Command {
