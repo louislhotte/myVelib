@@ -170,6 +170,13 @@ public class User {
         this.listOfUsedBicycleIds = listOfUsedBicycleIds;
     }
 
+
+    /**
+     * Adds the specified charges to the total charges of the user.
+     *
+     * @param charges The charges to be added to the total charges.
+     */
+
     public void addToTotalCharges(double charges){
         double currentTotalCharges = this.getTotalCharges();
         double newTotalCharges = currentTotalCharges + charges;

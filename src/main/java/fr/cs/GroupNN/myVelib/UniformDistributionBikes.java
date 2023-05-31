@@ -3,6 +3,13 @@ package fr.cs.GroupNN.myVelib;
 import java.util.ArrayList;
 
 public class UniformDistributionBikes extends Normal{
+
+    /**
+     * Retrieves the optimal itinerary based on the start and end locations, and bicycle type.
+     *
+     * @return The optimal itinerary as a two-dimensional array of coordinates.
+     */
+
     @Override
     public double[][] optimalItinerary(double[] startLocation, double[] endLocation, String bicycleType){
         ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();

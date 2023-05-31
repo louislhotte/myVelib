@@ -2,6 +2,11 @@ package fr.cs.GroupNN.myVelib;
 
 import java.util.ArrayList;
 
+
+/**
+ * Represents a planner for finding an optimal itinerary.
+ */
+
 public class Planner{
     // fields
     private double[] startLocation;
@@ -9,6 +14,14 @@ public class Planner{
     private String bicycleType;
     private PlanningPolicy policy;
 
+    /**
+     * Constructs a new Planner object.
+     *
+     * @param startLocation The starting location for the itinerary.
+     * @param endLocation   The ending location for the itinerary.
+     * @param bicycleType   The type of bicycle to use for the itinerary.
+     * @param policy        The planning policy to use for the itinerary.
+     */
     // constructor
     public Planner(double[] startLocation, double[] endLocation, String bicycleType, PlanningPolicy policy){
         super();
@@ -35,6 +48,12 @@ public class Planner{
         this.endLocation = endLocation;
     }
 
+
+    /**
+     * Retrieves the optimal itinerary based on the start and end locations, and bicycle type.
+     *
+     * @return The optimal itinerary as a two-dimensional array of coordinates.
+     */
     // other methods
     public double[][] optimalItinerary(){
         return policy.optimalItinerary(startLocation, endLocation, bicycleType);

@@ -11,17 +11,35 @@ public class Terminal implements BicycleVisitor {
         super();
     }
 
+
+    /**
+     * Visits a MechanicalBicycle and retrieves its hourly rate.
+     *
+     * @param bicycle The MechanicalBicycle to visit.
+     */
     @Override
     public void visit(MechanicalBicycle bicycle) {
         double hourlyRate = bicycle.getHourlyRate();
     }
 
+
+    /**
+     * Visits an ElectricalBicycle and retrieves its hourly rate.
+     *
+     * @param bicycle The ElectricalBicycle to visit.
+     */
     @Override
     public void visit(ElectricalBicycle bicycle) {
         double hourlyRate = bicycle.getHourlyRate();
     }
 
-
+    /**
+     * Calculates the cost of a bicycle rental for a given user and duration.
+     *
+     * @param user     The user renting the bicycle.
+     * @param duration The duration of the rental in minutes.
+     * @return The calculated cost of the rental.
+     */
     public double calculateCost(User user, int duration) {
         Bicycle bicycle = user.getRentedBicycle();
         double cost = 0;
@@ -65,6 +83,14 @@ public class Terminal implements BicycleVisitor {
         return cost;
     }
 
+
+    /**
+     * Rents a bicycle for a user from a docking station.
+     *
+     * @param dockingStation The docking station from which to rent the bicycle.
+     * @param user           The user renting the bicycle.
+     * @param bicycleType    The type of bicycle to rent.
+     */
     public void rentBicycle(DockingStation dockingStation, User user, String bicycleType) {
         if (user.getRentedBicycle() != null) {
             System.out.println("User already has a rented bicycle. Cannot rent another one.");
@@ -92,6 +118,13 @@ public class Terminal implements BicycleVisitor {
         System.out.println("Bicycle rented successfully.");
     }
 
+
+    /**
+     * Parks a bicycle for a user at a docking station.
+     *
+     * @param dockingStation The docking station at which to park the bicycle.
+     * @param user           The user parking the bicycle.
+     */
     public void parkBicycle(DockingStation dockingStation, User user) {
         Bicycle bicycle = user.getRentedBicycle();
 
@@ -130,6 +163,14 @@ public class Terminal implements BicycleVisitor {
         System.out.println("Bicycle parked successfully.");
     }
 
+
+
+    /**
+     * Calculates the duration of a user's rental.
+     *
+     * @param user The user who rented the bicycle.
+     * @return The duration of the rental in minutes.
+     */
     private int calculateDuration(User user) {
         Duration duration = Duration.between(user.getRentDateTime(), user.getParkDateTime());
         int minutes = (int) (duration.toMinutes() % 60 * 100_000_000);

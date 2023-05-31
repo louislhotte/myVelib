@@ -1,7 +1,9 @@
 package fr.cs.GroupNN.myVelib;
 
 import java.util.*;
-
+/**
+ * Represents a docking station for bicycles.
+ */
 public class DockingStation {
     private static int counter;
     private int id;
@@ -13,6 +15,15 @@ public class DockingStation {
     private static ArrayList<DockingStation> dockingStations = new ArrayList<DockingStation>();
     private int renting;
     private int dropping;
+
+    /**
+     * Constructs a new DockingStation object.
+     *
+     * @param dockingStationLocation The location of the docking station.
+     * @param stationType            The type of the docking station.
+     * @param slots                  The parking slots in the docking station.
+     * @param terminal               The terminal associated with the docking station.
+     */
 
     public DockingStation(double[] dockingStationLocation, String stationType, ParkingSlot[] slots, Terminal terminal) {
         super();
@@ -27,7 +38,12 @@ public class DockingStation {
         this.dropping = 0;
         dockingStations.add(this);
     }
-
+    /**
+     * Retrieves a docking station with the specified ID.
+     *
+     * @param stationID The ID of the docking station to retrieve.
+     * @return The DockingStation object with the specified ID, or null if not found.
+     */
     public static DockingStation getDockingStationByID(int stationID) {
         for (DockingStation dockingStation: dockingStations) {
             if (dockingStation.getId() == stationID) {
@@ -50,6 +66,11 @@ public class DockingStation {
         this.id = id;
     }
 
+    /**
+     * Retrieves the location of the docking station.
+     *
+     * @return The location of the docking station.
+     */
     public double[] getDockingStationLocation() {
         return dockingStationLocation;
     }
@@ -105,7 +126,11 @@ public class DockingStation {
     public void setDropping(int dropping) {
         this.dropping = dropping;
     }
-
+    /**
+     * Rents a bike from the docking station.
+     *
+     * @return The rented bicycle, or null if no bikes are available.
+     */
     public Bicycle rentBike() {
         boolean bikeInDockingStation = false;
         ParkingSlot selectedParkingSlot = null;
@@ -139,7 +164,11 @@ public class DockingStation {
 
         return rentedBicycle;
     }
-
+    /**
+     * Parks a bicycle in the docking station.
+     *
+     * @param bicycle The bicycle to be parked.
+     */
     public void parkBike(Bicycle bicycle){
         boolean freeParkInDockingStation = false;
         ParkingSlot selectedParkingSlot = null;
@@ -169,7 +198,11 @@ public class DockingStation {
 
         dropping++;
     }
-
+    /**
+     * Finds an occupied parking slot in the docking station.
+     *
+     * @return The occupied parking slot, or null if none are found.
+     */
     private ParkingSlot findOccupiedParkingSlot() {
         for (ParkingSlot parkingSlot : slots) {
             if (parkingSlot.isFree() && !parkingSlot.isOutOfOrder()) {
@@ -178,7 +211,11 @@ public class DockingStation {
         }
         return null;
     }
-
+    /**
+     * Checks if there is at least one free parking slot in the docking station.
+     *
+     * @return true if there is at least one free parking slot, false otherwise.
+     */
     public boolean oneFree() {
         boolean atLeastOneFree = false;
         for(ParkingSlot parkingSlot: slots){
@@ -191,7 +228,12 @@ public class DockingStation {
         }
         return atLeastOneFree;
     }
-
+    /**
+     * Checks if there is at least one bike of the specified type in the docking station.
+     *
+     * @param bicycleType The type of the bicycle to check.
+     * @return true if there is at least one bike of the specified type, false otherwise.
+     */
     public boolean oneBike(String bicycleType){
         boolean atLeastOneBike = false;
 
@@ -205,7 +247,12 @@ public class DockingStation {
         }
         return atLeastOneBike;
     }
-
+    /**
+     * Retrieves the number of bikes of the specified type in the docking station.
+     *
+     * @param bicycleType The type of the bicycle to count.
+     * @return The number of bikes of the specified type.
+     */
     public int getBikesNumber(String bicycleType){
         int bikesNumber = 0;
         for(ParkingSlot parkingSlot: slots){
@@ -217,7 +264,11 @@ public class DockingStation {
         }
         return bikesNumber;
     }
-
+    /**
+     * Retrieves the number of free parking slots in the docking station.
+     *
+     * @return The number of free parking slots.
+     */
     public int getFreeSlotsNumber(){
         int freeSlotsNumber = 0;
         for(ParkingSlot parkingSlot: slots){
@@ -230,12 +281,26 @@ public class DockingStation {
         return freeSlotsNumber;
     }
 
+    /**
+     * Checks if two locations are equal.
+     *
+     * @param point1 The first location to compare.
+     * @param point2 The second location to compare.
+     * @return true if the two locations are equal, false otherwise.
+     */
     public static boolean equalLocation(double[] point1, double[] point2){
         if(point1[0] == point2[0] && point1[1] == point2[1])
             return true;
         return false;
     }
 
+
+    /**
+     * Retrieves a docking station based on its location.
+     *
+     * @param location The location of the docking station to retrieve.
+     * @return The DockingStation object with the specified location, or null if not found.
+     */
     public static DockingStation getDockingStationFromLocation(double[] location){
         DockingStation locatedDockingStation = null;
         for (DockingStation dockingStation: dockingStations){
@@ -248,9 +313,22 @@ public class DockingStation {
         return locatedDockingStation;
     }
 
+
+    /**
+     * Retrieves the list of all docking stations.
+     *
+     * @return The list of all docking stations.
+     */
     public static ArrayList<DockingStation> getDockingStations(){
         return dockingStations;
     }
+
+
+    /**
+     * Generates a string representation of the DockingStation object.
+     *
+     * @return A string representation of the DockingStation object.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
