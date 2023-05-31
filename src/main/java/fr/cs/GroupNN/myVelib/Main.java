@@ -1,57 +1,77 @@
 package fr.cs.GroupNN.myVelib;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+/**
+ * This class represents the main entry point of the MyVelib application. It demonstrates a user case scenario
+ * by setting up the initial state of the application, including docking stations, bicycles, parking slots, and a planner.
+ * It then executes the planner's optimal itinerary calculation and displays the resulting itinerary.
+ */
 public class Main {
+    /**
+     * The main method is the entry point of the MyVelib application.
+     *
+     * @param args The command-line arguments.
+     */
     public static void main(String[] args) {
-        User user = new User("Louis Lhotte", new double[]{0.0, 0.0}, new Cards("VLIBRE"), "");
+        // Set up the starting and ending locations for the itinerary
+        double[] startLocation = {0.0, 0.0};
+        double[] endLocation = {10.0, 10.0};
 
-        // Bicycles
-        double[] bicycleLocation1 = { 1.0, 2.0 };
-        double[] bicycleLocation2 = { 3.0, 4.0 };
-        Bicycle bicycle1 = new MechanicalBicycle(bicycleLocation1);
-        Bicycle bicycle2 = new ElectricalBicycle(bicycleLocation2);
+        // Create parking slots for the docking stations
+        ParkingSlot[] parkingSlots1 = {};
+        ParkingSlot[] parkingSlots2 = {};
+        ParkingSlot[] parkingSlots3 = {};
+        ParkingSlot[] parkingSlots4 = {};
 
-        // Create parking slots
-        ParkingSlot parkingSlot1 = new ParkingSlot(bicycle1, false, false);
-        ParkingSlot parkingSlot2 = new ParkingSlot(bicycle2, false, false);
-        ParkingSlot parkingSlot3 = new ParkingSlot(null, true, false);
-        ParkingSlot parkingSlot4 = new ParkingSlot(null, true, false);
-
-        // Create terminals
+        // Create a terminal
         Terminal terminal = new Terminal();
 
-        // Create docking stations
-        DockingStation dockingStation1 = new DockingStation(new double[]{1.0, 2.0}, "Type1", new ParkingSlot[]{parkingSlot1, parkingSlot2}, terminal);
-        DockingStation dockingStation2 = new DockingStation(new double[]{3.0, 4.0}, "Type2", new ParkingSlot[]{parkingSlot3, parkingSlot4}, terminal);
+        // Create docking stations at different locations
+        DockingStation dockingStation1 = new DockingStation(new double[]{1.0, 1.0}, "Standard", parkingSlots1, terminal);
+        DockingStation dockingStation2 = new DockingStation(new double[]{9.0, 9.0}, "Standard", parkingSlots2, terminal);
+        DockingStation dockingStation3 = new DockingStation(new double[]{0.0, 0.0}, "Standard", parkingSlots3, terminal);
+        DockingStation dockingStation4 = new DockingStation(new double[]{11.01, 11.01}, "Plus", parkingSlots4, terminal);
 
-        ArrayList<DockingStation> dockingStations = DockingStation.getDockingStations();
+        // Create bicycles at different locations
+        double[] bicycleLocation1 = { 1.0, 1.0 };
+        double[] bicycleLocation2 = { 9.0, 9.0 };
+        double[] bicycleLocation3 = { -1.1, -1.1 };
+        Bicycle b1 = new MechanicalBicycle(bicycleLocation1);
+        Bicycle b2 = new ElectricalBicycle(bicycleLocation1);
+        Bicycle b3 = new MechanicalBicycle(bicycleLocation2);
+        Bicycle b4 = new ElectricalBicycle(bicycleLocation2);
+        Bicycle b5 = new ElectricalBicycle(bicycleLocation3);
 
-        // Set start and end locations
-        double[] startLocation = { 0.0, 0.0 };
-        double[] endLocation = { 5.0, 5.0 };
+        // Create parking slots
+        ParkingSlot parkingSlot1 = new ParkingSlot(b1, false, false);
+        ParkingSlot parkingSlot2 = new ParkingSlot(b2, false, false);
+        ParkingSlot parkingSlot3 = new ParkingSlot(null, true, false);
+        ParkingSlot parkingSlot4 = new ParkingSlot(null, true, false);
+        dockingStation1.setSlots(new ParkingSlot[] {parkingSlot1, parkingSlot2, parkingSlot3, parkingSlot4});
 
-        // Create a planner
-        Planner planner = new Planner(startLocation, endLocation, "mechanical", new Normal());
 
-        // Use the planner as needed
+        // Create parking slots
+        ParkingSlot parkingSlot5 =  new ParkingSlot(b3, false, false);
+        ParkingSlot parkingSlot6 = new ParkingSlot(b4, false, false);
+        ParkingSlot parkingSlot7 = new ParkingSlot(null, true, false);
+        ParkingSlot parkingSlot8 = new ParkingSlot(null, true, false);
+        dockingStation2.setSlots(new ParkingSlot[] {parkingSlot5, parkingSlot6, parkingSlot7, parkingSlot8});
+
+        ParkingSlot parkingSlot9 = new ParkingSlot(null, true, false);
+        ParkingSlot parkingSlot10 = new ParkingSlot(null, true, false);
+        dockingStation3.setSlots(new ParkingSlot[] {parkingSlot9, parkingSlot10});
+
+        ParkingSlot parkingSlot11 = new ParkingSlot(null, true, false);
+        ParkingSlot parkingSlot12 = new ParkingSlot(null, true, false);
+        dockingStation4.setSlots(new ParkingSlot[] {parkingSlot11, parkingSlot12});
+
+
+        String bicycleType = "electrical";
+        PlanningPolicy policy = new PreferStreetBike();
+        Bicycle.getStreetBicycles().trimToSize();
+        System.out.println((Bicycle.getStreetBicycles().size()));
+
+        Planner planner = new Planner(startLocation, endLocation, bicycleType, policy);
         double[][] itinerary = planner.optimalItinerary();
-
-        // Access the itinerary
-        if (itinerary != null) {
-            for (int i = 0; i < itinerary.length; i++) {
-                System.out.println("Waypoint " + (i + 1) + ": " + Arrays.toString(itinerary[i]));
-            }
-        } else {
-            System.out.println("No optimal itinerary found.");
-        }
-
-        DockingStation dockingStationStart = DockingStation.getDockingStationFromLocation(startLocation);
-        DockingStation dockingStationEnd = DockingStation.getDockingStationFromLocation(endLocation);
-
-        dockingStationStart.getTerminal().rentBicycle(dockingStationStart, user, "mechanical");
-        dockingStationStart.getTerminal().parkBicycle(dockingStationEnd, user);
-
+        System.out.println(itinerary);
     }
 }
