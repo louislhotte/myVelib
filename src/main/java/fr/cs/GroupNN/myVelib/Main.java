@@ -1,5 +1,7 @@
 package fr.cs.GroupNN.myVelib;
 
+import java.util.Arrays;
+
 /**
  * This class represents the main entry point of the MyVelib application. It demonstrates a user case scenario
  * by setting up the initial state of the application, including docking stations, bicycles, parking slots, and a planner.
@@ -72,6 +74,6 @@ public class Main {
 
         Planner planner = new Planner(startLocation, endLocation, bicycleType, policy);
         double[][] itinerary = planner.optimalItinerary();
-        System.out.println(itinerary);
+        System.out.println(Arrays.deepToString(itinerary));
     }
 }
