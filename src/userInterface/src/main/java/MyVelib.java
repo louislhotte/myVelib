@@ -2,7 +2,6 @@ package main.java;
 
 import fr.cs.Group07.myVelib.DockingStation;
 import fr.cs.Group07.myVelib.User;
-import fr.cs.GroupNN.myVelib.*;
 
 import java.util.ArrayList;
 

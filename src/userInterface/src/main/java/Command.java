@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import fr.cs.Group07.myVelib.*;
-import fr.cs.GroupNN.myVelib.*;
 
 public class Command {
     private String commandOrder;
