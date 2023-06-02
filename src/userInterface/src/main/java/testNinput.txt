@@ -7,8 +7,6 @@ rentBike 1 1 defaultName Electrical
 rentBike 2 1 defaultName Mechanical
 rentBike 3 2 defaultName Mechanical
 
-userID, stationID, duration, name
-
 returnBike 2 1 50 defaultName
 returnBike 3 1 70 defaultName
 
