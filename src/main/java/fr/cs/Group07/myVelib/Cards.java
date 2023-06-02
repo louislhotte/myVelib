@@ -4,6 +4,7 @@ public class Cards {
     // VLIBRE and VMAX are the two registration types
     private String registrationType;
 
+    // Constructor
     public Cards(String registrationType) {
         super();
         this.registrationType = registrationType;

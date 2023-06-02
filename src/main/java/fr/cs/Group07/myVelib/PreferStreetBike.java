@@ -2,6 +2,11 @@ package fr.cs.Group07.myVelib;
 
 import java.util.*;
 
+/**
+ * The PreferStreetBike class represents a sorting policy that prefers street bikes over other bikes
+ * when determining the optimal itinerary for a user's trip.
+ */
+
 public class PreferStreetBike extends Normal {
 
     /**

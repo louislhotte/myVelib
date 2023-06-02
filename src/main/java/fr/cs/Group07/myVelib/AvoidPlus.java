@@ -1,12 +1,18 @@
 package fr.cs.Group07.myVelib;
 
 import java.util.*;
-
+/**
+ * The AvoidPlus class represents a planning policy that avoids docking stations of type "plus"
+ * when determining the optimal itinerary based on the start and end locations and bicycle type.
+ */
 public class AvoidPlus implements PlanningPolicy{
 
     /**
      * Retrieves the optimal itinerary based on the start and end locations, and bicycle type.
      *
+     * @param startLocation The start location.
+     * @param endLocation   The end location.
+     * @param bicycleType   The type of bicycle.
      * @return The optimal itinerary as a two-dimensional array of coordinates.
      */
     @Override

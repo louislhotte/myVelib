@@ -3,12 +3,18 @@ package fr.cs.Group07.myVelib;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+/**
+ * The Terminal class represents a terminal in the myVelib system. It implements the BicycleVisitor interface
+ * to visit different types of bicycles and perform calculations and operations related to rentals and parking.
+ */
 public class Terminal implements BicycleVisitor {
 
+    /**
+     * Constructs a Terminal object.
+     */
     public Terminal() {
         super();
     }
-
 
     /**
      * Visits a MechanicalBicycle and retrieves its hourly rate.
@@ -19,7 +25,6 @@ public class Terminal implements BicycleVisitor {
     public void visit(MechanicalBicycle bicycle) {
         double hourlyRate = bicycle.getHourlyRate();
     }
-
 
     /**
      * Visits an ElectricalBicycle and retrieves its hourly rate.
@@ -63,8 +68,7 @@ public class Terminal implements BicycleVisitor {
 
                 timeCredit = Math.max(timeCredit - durationExcess, 0);
                 user.setUserTimeCreditBalance(timeCredit);
-            }
-            else if (registrationType.equals("VMAX")) {
+            } else if (registrationType.equals("VMAX")) {
                 int durationExcess = Math.max(duration - freeHour, 0);
                 int effectiveDuration = Math.max(durationExcess - timeCredit, 0);
 
@@ -72,15 +76,12 @@ public class Terminal implements BicycleVisitor {
 
                 timeCredit = Math.max(timeCredit - durationExcess, 0);
                 user.setUserTimeCreditBalance(timeCredit);
-            }
-
-            else {
+            } else {
                 cost = (duration * hourlyRate) / 60.0;
             }
         }
         return cost;
     }
-
 
     /**
      * Rents a bicycle for a user from a docking station.
@@ -116,7 +117,6 @@ public class Terminal implements BicycleVisitor {
         System.out.println("Bicycle rented successfully.");
     }
 
-
     /**
      * Parks a bicycle for a user at a docking station.
      *
@@ -126,7 +126,7 @@ public class Terminal implements BicycleVisitor {
     public void parkBicycle(DockingStation dockingStation, User user) {
         Bicycle bicycle = user.getRentedBicycle();
 
-        if (bicycle == null){
+        if (bicycle == null) {
             System.out.println("User does not have a bicycle to park.");
             return;
         }
@@ -147,7 +147,7 @@ public class Terminal implements BicycleVisitor {
 
         user.setRentedBicycle(null);
         user.setUserLocation(dockingStation.getDockingStationLocation());
-        if (dockingStation.getStationType() == "plus"){
+        if (dockingStation.getStationType().equals("plus")) {
             user.setTimeCreditEarned(user.getTimeCreditEarned() + 5);
             user.setUserTimeCreditBalance(user.getUserTimeCreditBalance() + 5);
         }
@@ -160,8 +160,6 @@ public class Terminal implements BicycleVisitor {
 
         System.out.println("Bicycle parked successfully.");
     }
-
-
 
     /**
      * Calculates the duration of a user's rental.

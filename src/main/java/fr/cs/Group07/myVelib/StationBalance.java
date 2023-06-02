@@ -1,37 +1,66 @@
 package fr.cs.Group07.myVelib;
 
+/**
+ * The StationBalance class represents the balance of a docking station,
+ * including the total number of rents and returns.
+ */
 public class StationBalance {
-    // fields
     private DockingStation dockingStation;
 
-    // constructor
-    public StationBalance(DockingStation dockingStation){
+    /**
+     * Constructs a StationBalance object for the specified docking station.
+     *
+     * @param dockingStation the docking station
+     */
+    public StationBalance(DockingStation dockingStation) {
         super();
         this.setDockingStation(dockingStation);
     }
 
-    // getters and setters
+    /**
+     * Returns the docking station associated with this station balance.
+     *
+     * @return the docking station
+     */
     public DockingStation getDockingStation() {
         return dockingStation;
     }
 
+    /**
+     * Sets the docking station for this station balance.
+     *
+     * @param dockingStation the docking station
+     */
     public void setDockingStation(DockingStation dockingStation) {
         this.dockingStation = dockingStation;
     }
 
-    // methods
-    public int getTotalNumberOfRents(){
+    /**
+     * Returns the total number of rents at the docking station.
+     *
+     * @return the total number of rents
+     */
+    public int getTotalNumberOfRents() {
         return dockingStation.getRenting();
     }
 
-    public int getTotalNumberOfReturn(){
+    /**
+     * Returns the total number of returns at the docking station.
+     *
+     * @return the total number of returns
+     */
+    public int getTotalNumberOfReturns() {
         return dockingStation.getDropping();
     }
 
-    // toString method
+    /**
+     * Returns a string representation of the station balance.
+     *
+     * @return a string representing the total number of rents and returns
+     */
     @Override
-    public String toString(){
-        String s = "Total number of rents=" + this.getTotalNumberOfRents() + "; Total number of return=" + this.getTotalNumberOfReturn();
+    public String toString() {
+        String s = "Total number of rents=" + this.getTotalNumberOfRents() + "; Total number of returns=" + this.getTotalNumberOfReturns();
         return s;
     }
 }

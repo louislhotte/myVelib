@@ -2,6 +2,9 @@ package fr.cs.Group07.myVelib;
 
 import java.util.*;
 
+/**
+ * The Normal class represents a default sorting policy for determining the optimal itinerary of a user's trip.
+ */
 public class Normal implements PlanningPolicy{
 
     /**

@@ -3,7 +3,17 @@ package fr.cs.Group07.myVelib;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The DockingStationGenerator class is responsible for generating a list of docking stations with random properties.
+ */
+
 public class DockingStationGenerator {
+
+    /**
+     * Generates a list of docking stations with random properties.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         List<DockingStation> dockingStations = new ArrayList<>();
 
@@ -24,12 +34,25 @@ public class DockingStationGenerator {
         }
     }
 
+
+    /**
+     * Generates random coordinates for a docking station location.
+     *
+     * @return an array of doubles representing the x and y coordinates of the location
+     */
     private static double[] generateRandomLocation() {
         double x = Math.random() * 100;
         double y = Math.random() * 100;
         return new double[]{x, y};
     }
 
+
+
+    /**
+     * Generates an array of parking slots with random properties.
+     *
+     * @return an array of ParkingSlot objects
+     */
     private static ParkingSlot[] generateParkingSlots() {
         ParkingSlot[] parkingSlots = new ParkingSlot[5];
 

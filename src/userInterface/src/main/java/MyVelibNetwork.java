@@ -1,25 +1,33 @@
 package main.java;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 import org.apache.commons.configuration2.INIConfiguration;
 import org.apache.commons.configuration2.SubnodeConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
-
+/**
+ * The MyVelibNetwork class represents the main entry point for the MyVelib network program.
+ */
 public class MyVelibNetwork {
     public static void main(String[] args) throws Exception {
         // Initialization of the Velib Network
         readMyVelibIni();
 
-        // ReadCommand
+        // Read Command
         readCommand();
 
         // Exit
         exit();
     }
 
+    /**
+     * Reads the my_velib.ini configuration file and prints the parsed information.
+     */
     private static void readMyVelibIni() {
         try {
             Configurations configs = new Configurations();
@@ -55,9 +63,10 @@ public class MyVelibNetwork {
         }
     }
 
-
     /**
-     * Method created to read the commands
+     * Reads and executes commands entered by the user.
+     *
+     * @throws Exception If an error occurs while reading commands.
      */
     private static void readCommand() throws Exception {
         Command command;
@@ -76,10 +85,10 @@ public class MyVelibNetwork {
         } while (command != null && !command.getCommandOrder().equalsIgnoreCase("exit"));
     }
 
-
-
     /**
-     * Read command from CLUI
+     * Reads a command from the console input.
+     *
+     * @return The parsed Command object.
      */
     private static Command readFromConsole() {
         try {
@@ -107,9 +116,9 @@ public class MyVelibNetwork {
         return null;
     }
 
-
-
-
+    /**
+     * Prints an exit message when the program exits.
+     */
     private static void exit() {
         System.out.println("You have successfully exited the Velib Network.");
     }

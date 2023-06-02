@@ -2,6 +2,10 @@ package fr.cs.Group07.myVelib;
 
 import java.util.*;
 
+
+/**
+ * The abstract base class for different types of bicycles in the MyVelib system.
+ */
 public abstract class Bicycle {
     private static int counter;
     private int bicycleId;
