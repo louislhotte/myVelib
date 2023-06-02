@@ -333,6 +333,22 @@ public class Command {
         }
     }
 
+    public String getCommandOrder() {
+        return commandOrder;
+    }
+
+    public void setCommandOrder(String commandOrder) {
+        this.commandOrder = commandOrder;
+    }
+
+    public ArrayList<String> getArguments() {
+        return arguments;
+    }
+
+    public void setArguments(ArrayList<String> arguments) {
+        this.arguments = arguments;
+    }
+
     public int online(String velibNetworkName, int stationID){
         MyVelib velibNetwork = MyVelib.inMyVelibNetworks(velibNetworkName);
 
@@ -354,5 +370,6 @@ public class Command {
             }
             return 0;
         }
+
     }
 }
