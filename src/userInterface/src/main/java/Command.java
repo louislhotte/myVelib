@@ -2,6 +2,7 @@ package main.java;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.*;
 
 import fr.cs.Group07.myVelib.*;
 
@@ -161,12 +162,22 @@ public class Command {
                     int userID = Integer.parseInt(arguments.get(0));
                     int stationID = Integer.parseInt(arguments.get(1));
                     double duration = Double.parseDouble(arguments.get(2));
-                    String name = arguments.get(4);
+                    String name = arguments.get(3);
                     returnBike(userID, stationID, duration, name);
                     return "Bike successfully returned to docking station " + stationID;
                 }
                 else {
                     return "4 arguments expected.";
+                }
+
+            case "runtest":
+                if (arguments.size() == 1){;
+                    String textFileName = arguments.get(0);
+                    runtest(textFileName);
+                    return "Test successfully ran!";
+                }
+                else{
+                    return "1 arguments expected. Please, try again.";
                 }
 
             default:
@@ -371,5 +382,38 @@ public class Command {
             return 0;
         }
 
+    }
+
+    public void runtest(String textFileName){
+        String content = "";
+
+        File file = null;
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+
+        try{
+            file = new File("./userInterface/src/main.java/" + textFileName);
+            fileReader = new FileReader(file);
+            bufferedReader = new BufferedReader(fileReader);
+
+            String line = "";
+            while((line = bufferedReader.readLine()) != null){
+                String[] argumentArray = line.split(" ");
+                int lengthOfArgumentArray = argumentArray.length;
+
+                String commandName = argumentArray[0];
+                ArrayList<String> arguments = new ArrayList<String>();
+
+                for (int index = 1; index < lengthOfArgumentArray; index++) {
+                    arguments.add(argumentArray[index]);
+                }
+
+                Command command = new Command(commandName, arguments);
+                System.out.println(command.eval());
+            }
+        }
+        catch (Exception exception){
+            System.out.println("The entered file does not exist does not exist in this directory. Please try another file name.");
+        }
     }
 }
